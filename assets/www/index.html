@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>Cordova Facebook</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
+<link rel="stylesheet" href="android-theme.css" />
+<script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery-1.7.2.js"></script>
+<!-- <script type="text/javascript" charset="utf-8" src="jquery.mobile.android-theme.js"></script> -->
+<script type="text/javascript" charset="utf-8" src="jquery-mobile-customisation.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.1.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="cdv-plugin-fb-connect.js"></script>
+<script type="text/javascript" charset="utf-8" src="facebook_js_sdk.js"></script>
+<script type="text/javascript" charset="utf-8" src="jquery.tinysort.js"></script>
+<script type="text/javascript" charset="utf-8" src="sorting.js"></script>
+<script type="text/javascript" charset="utf-8" src="populatebars.js"></script>
+<script type="text/javascript" charset="utf-8">
+	$.tinysort.defaults.place = 'org';	
+</script>
+
+
+</head>
+<body>
+
+	<div data-role="page" id="page1">
+		
+	<script type="text/javascript" charset="utf-8" src="fbk-logic.js"></script>
+	
+		<div data-role="header" data-theme="b" data-position="fixed">
+			<a data-role="button" id="loginoutbutton" onclick="login()">Login</a>
+			<h2>Facebook Group Reader</h2>
+			<a data-role="button" onclick="fetchgroups()">Fetch!</a>	
+		</div>
+
+		<div data-role="content">
+			
+<!-- 			<a data-role="button" id="" onclick="logout()">Log out Test</a>
+			<a data-role="button" id="" onclick="login()">Login Test</a>		 -->		
+			
+			<div id="accordioncontainer"></div>
+
+		</div>
+	
+		<div data-role="footer" id="footerbar" data-theme="d" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li>
+						<a class="ui-btn-active" href="#page1" data-theme="a" data-icon="home" data-transition="pop">Unify</a>
+					</li>
+					<li>
+						<a href="#page3" data-theme="a" data-icon="plus" data-transition="pop">Feeds</a>
+					</li>
+					<li>
+						<a href="#page7" data-theme="a" data-icon="grid" data-transition="slide">Gadgets</a>
+					</li>
+					<li>
+						<a href="#page9" data-theme="a" data-icon="info" data-transition="fade">Profile</a>
+					</li>
+					<li>
+						<a href="#page14" data-theme="a" data-icon="gear" data-transition="flip">Settings</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	
+	<script>
+		document.addEventListener("deviceready", onDeviceReady, false);
+		
+		function onDeviceReady() {
+			var sessionobject = localStorage.getItem("cdv_fb_session");
+			// need to somehow check whether logged in or not...
+			if (sessionobject.expiresIn > 0){
+				$('#loginoutbutton').attr("onclick", "logout()").text("Log Out")
+			}
+			
+
+		}		
+	</script>
+	
+	</div>
+</body>
+</html>
