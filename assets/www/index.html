@@ -4,20 +4,20 @@
 <title>Cordova Facebook</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
-<link rel="stylesheet" href="android-theme.css" />
-<script type="text/javascript" charset="utf-8" src="cordova-1.8.1.js"></script>
-<script type="text/javascript" charset="utf-8" src="jquery-1.7.2.js"></script>
-<!-- <script type="text/javascript" charset="utf-8" src="jquery.mobile.android-theme.js"></script> -->
-<script type="text/javascript" charset="utf-8" src="jquery-mobile-customisation.js"></script>
-<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.1.0.js"></script>
-<script type="text/javascript" charset="utf-8" src="cdv-plugin-fb-connect.js"></script>
-<script type="text/javascript" charset="utf-8" src="facebook_js_sdk.js"></script>
-<script type="text/javascript" charset="utf-8" src="jquery.tinysort.js"></script>
-<script type="text/javascript" charset="utf-8" src="sorting.js"></script>
-<script type="text/javascript" charset="utf-8" src="populatebars.js"></script>
-<script type="text/javascript" charset="utf-8">
-	$.tinysort.defaults.place = 'org';	
-</script>
+<link rel="stylesheet" href="css/android-theme.css" />
+<link rel="stylesheet" href="css/my.css" />
+<script type="text/javascript" charset="utf-8" src="js/cordova-1.8.1.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.mobile.android-theme.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery-mobile-customisation.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.1.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/cdv-plugin-fb-connect.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/facebook_js_sdk.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/query.tinysort.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/sorting.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/populatebars.js"></script>
+<script type="text/javascript" charset="utf-8" src="js/fbk-logic.js"></script>
+
 
 
 </head>
@@ -29,7 +29,7 @@
 	
 		<div data-role="header" data-theme="b" data-position="fixed">
 			<a data-role="button" id="loginoutbutton" onclick="login()">Login</a>
-			<h2>Facebook Group Reader</h2>
+			<h2>Group Reader</h2>
 			<a data-role="button" onclick="fetchgroups()">Fetch!</a>	
 		</div>
 
@@ -42,23 +42,14 @@
 
 		</div>
 	
-		<div data-role="footer" id="footerbar" data-theme="d" data-position="fixed">
+		<div data-role="footer" id="footerbar" data-theme="b" data-position="fixed">
 			<div data-role="navbar" data-iconpos="top">
 				<ul>
 					<li>
-						<a class="ui-btn-active" href="#page1" data-theme="a" data-icon="home" data-transition="pop">Unify</a>
+						<a class="ui-btn-active" href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
 					</li>
 					<li>
-						<a href="#page3" data-theme="a" data-icon="plus" data-transition="pop">Feeds</a>
-					</li>
-					<li>
-						<a href="#page7" data-theme="a" data-icon="grid" data-transition="slide">Gadgets</a>
-					</li>
-					<li>
-						<a href="#page9" data-theme="a" data-icon="info" data-transition="fade">Profile</a>
-					</li>
-					<li>
-						<a href="#page14" data-theme="a" data-icon="gear" data-transition="flip">Settings</a>
+						<a href="#page3" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
 					</li>
 				</ul>
 			</div>
@@ -74,7 +65,7 @@
 				$('#loginoutbutton').attr("onclick", "logout()").text("Log Out")
 			}
 			
-
+			init();
 		}		
 	</script>
 	
