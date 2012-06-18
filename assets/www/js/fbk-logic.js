@@ -1,4 +1,4 @@
- 		var init = function(){
+ 		var init = function(isloggedin){
 			try {
 				FB.init({
 					appId : "306316522792748",
@@ -18,8 +18,11 @@
 				$('#accordioncontainer').html(loaderhtml);
 			}
 			
-			window.setTimeout(fetchgroups, 1000);
-			
+			if (isloggedin){
+			window.setTimeout(fetchgroups, 2000);
+			} else {
+			login();
+			}
 		}
 
 		function fetchgroups() {
@@ -35,7 +38,16 @@
 				fields : 'id, name, picture'
 			}, function(response) {
 				if (response.error) {
-					response.error.code = 2500 ? alert("Please log into Facebook") : alert(JSON.stringify(response.error));
+					if (response.error.code == 104 || response.error.code ==2500){
+						var r = confirm("You don't seem to be logged into Facebook. Would you like to login now?")
+						r==true ? login() : null;
+						
+					} else {
+					
+					targetdiv.html("<p>Something went awry! Please try to load this feed again by collapsing this section and expanding it again. Are you definitely connected to the intertubes?</p>");
+					alert(JSON.stringify(response.error));
+					
+					}
 				} else {
 					fdata = response.data;
 					fdata.sort(sort_by('name', false));
@@ -84,8 +96,17 @@
 			{fields : ''},
 			function(response){
 				if (response.error) {
-					targetdiv.html("<p>Something went awry! Please try to load this feed again by collapsing this section and expanding it again.</p>");
+					if (response.error.code == 104){
+						var r = confirm("You don't seem to be logged into Facebook. Would you like to login now?")
+						r==true ? login() : null;
+						
+					} else {
+					
+					targetdiv.html("<p>Something went awry! Please try to load this feed again by collapsing this section and expanding it again. Are you definitely connected to the intertubes?</p>");
 					alert(JSON.stringify(response.error));
+					
+					}
+					
 				} else {
 					fhtml = ""
 					fdata = response.data;
@@ -101,23 +122,32 @@
 	}
 
 		function login() {
+			//Todo - check if already logged in and if so, tell user.
+			
 			FB.login(function(response) {
 				if (response.authResponse) {
 					alert('Logged in successfully!');
+					fetchgroups()
+					$('#loginoutbutton').attr("onclick", "logout()")
+					$('#loginoutbutton span').text("Logout")
 				} else {
 					alert('Please try logging in again!');
 				}
 			}, {
 				scope : 'email, user_groups'
 			});
+			
+
 		}
 		
 		function logout(){
 			FB.logout(function(response) {
 				if (response.authResponse) {
-					alert('logged out');
+					alert('Logged out!');
+					$('#loginoutbutton').attr("onclick", "login()")
+					$('#loginoutbutton span').text("Login")
 				} else {
-					alert('not logged out');
+					alert('Not logged out - try again!');
 				}
 				});
 			}

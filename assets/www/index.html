@@ -27,7 +27,7 @@
 		
 	<script type="text/javascript" charset="utf-8" src="fbk-logic.js"></script>
 	
-		<div data-role="header" data-theme="b" data-position="fixed">
+		<div data-role="header" data-theme="b" data-position="fixed" id="page1header">
 			<a data-role="button" id="loginoutbutton" onclick="login()">Login</a>
 			<h2>Group Reader</h2>
 			<a data-role="button" onclick="fetchgroups()">Fetch!</a>	
@@ -42,7 +42,7 @@
 
 		</div>
 	
-		<div data-role="footer" id="footerbar" data-theme="b" data-position="fixed">
+		<div data-role="footer" id="page1footer" data-theme="b" data-position="fixed">
 			<div data-role="navbar" data-iconpos="top">
 				<ul>
 					<li>
@@ -59,13 +59,26 @@
 		document.addEventListener("deviceready", onDeviceReady, false);
 		
 		function onDeviceReady() {
-			var sessionobject = localStorage.getItem("cdv_fb_session");
-			// need to somehow check whether logged in or not...
-			if (sessionobject.expiresIn > 0){
-				$('#loginoutbutton').attr("onclick", "logout()").text("Log Out")
+			
+			try{
+				var sessionstring = localStorage.getItem("cdv_fb_session");
+			} catch (e) {
+				alert(e);
+				init(false);
 			}
 			
-			init();
+			var sessionobject = JSON.parse(sessionstring)
+			
+			if (sessionobject && sessionobject.expiresIn > 0){
+				$('#loginoutbutton').attr("onclick", "logout()")
+				$('#loginoutbutton span').text("Logout")
+	
+				init(true);
+			} else {
+				init(false);
+			}
+			
+
 		}		
 	</script>
 	
