@@ -1,4 +1,5 @@
 function page1init() {
+	console.log("page 1 initialised")
 	if(fbkisloggedin()){
 		switchloginbutton("logout");
 		fbafterinit(true);
@@ -8,5 +9,9 @@ function page1init() {
 }
 
 function page2init() {
-	alert("woo! it works!")
+	console.log("page 2 initialised")
+}
+
+function page3init() {
+	console.log("page 3 initialised")
 }

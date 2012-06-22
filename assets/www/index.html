@@ -23,6 +23,19 @@
 
 
 <body>
+	
+<!-- 	<div data-role="page" class="page" id="page0">
+		
+
+		<div data-role="content" id="page1content">
+			
+			
+			
+		</div>
+
+		
+	</div> -->
+
 
 	<div data-role="page" class="page" id="page1">
 		
@@ -43,6 +56,9 @@
 					</li>
 					<li>
 						<a href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
+					</li>
+					<li>
+						<a href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
 					</li>
 				</ul>
 			</div>
@@ -65,15 +81,45 @@
 			<div data-role="navbar" data-iconpos="top">
 				<ul>
 					<li>
-						<a href="#page1" data-theme="b" data-icon="home">Unify</a>
+						<a href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
 					</li>
 					<li>
-						<a class="ui-btn-active" href="#page2" data-theme="b" data-icon="plus">Feeds</a>
+						<a class="ui-btn-active" href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
+					</li>
+					<li>
+						<a href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
+		
+	<div data-role="page" class="page" id="page3">
+		
+		<div data-role="header" data-theme="b" data-position="fixed" id="page3header">
+			<h3>Settings</h3>
+		</div>
+
+		<div data-role="content" id="page3content">
+			<div id="page3accordioncontainer"></div>
+		</div>
+
+		<div data-role="footer" id="page3footer" data-theme="b" data-position="fixed">
+			<div data-role="navbar" data-iconpos="top">
+				<ul>
+					<li>
+						<a href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
+					</li>
+					<li>
+						<a href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
+					</li>
+					<li>
+						<a class="ui-btn-active" href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
 		
 </body>
 </html>

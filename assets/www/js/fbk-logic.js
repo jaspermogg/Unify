@@ -22,7 +22,7 @@
 			}
 			
 			if (isloggedin){
-			window.setTimeout(fetchgroups($('#page1accordioncontainer')), 10);
+			window.setTimeout(fetchgroups($('#page1accordioncontainer')), 2000);
 			} else {
 			login();
 			}
@@ -41,7 +41,7 @@
 				if (response.error) {
 					
 					if (response.error.code ==2500){
-						login()						
+						page1init()						
 										
 					} else if (response.error.code == 104) {
 						var r = confirm("You don't seem to be logged into Facebook. Would you like to login now? [A]")
