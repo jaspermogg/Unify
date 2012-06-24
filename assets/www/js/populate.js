@@ -28,7 +28,6 @@ function populateBars(barsnumber){
 	accordioncontainer.html(barshtml);
 	// $('#accordion div:first').attr("data-collapsed", "false");
 	accordioncontainer.trigger("create");
-	$('#footerbar').trigger("refresh");
 	$('.ui-collapsible-heading-toggle').bind("click", function(event){feedfetch(event)})
 	$('.ui-collapsible-heading-toggle .ui-btn-text').addClass("hdrtext")
 	return currentpageid

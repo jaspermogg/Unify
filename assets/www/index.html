@@ -1,24 +1,26 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<title>Cordova Facebook</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
-<link rel="stylesheet" href="css/android-theme.css" />
-<link rel="stylesheet" href="css/my.css" />
-<script type="text/javascript" charset="utf-8" src="js/cordova-1.8.1.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery-1.7.2.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.mobile.android-theme.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery-mobile-customisation.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/jquery.mobile-1.1.0.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/cdv-plugin-fb-connect.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/facebook_js_sdk.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/query.tinysort.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/sorting.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/populate.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/fbk-logic.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/init.js"></script>
-<script type="text/javascript" charset="utf-8" src="js/eventhandlers.js"></script>
+	<title>Cordova Facebook</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="https://www.google.com/jsapi"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
+	<link rel="stylesheet" href="css/android-theme.css" />
+	<link rel="stylesheet" href="css/my.css" />
+	<script src="js/cordova-1.8.1.js"></script>
+	<script src="js/childbrowser.js"></script>
+	<script src="js/jquery-1.7.2.js"></script>
+	<script src="js/jquery.mobile.android-theme.js"></script>
+	<script src="js/jquery-mobile-customisation.js"></script>
+	<script src="js/jquery.mobile-1.1.0.js"></script>
+	<script src="js/cdv-plugin-fb-connect.js"></script>
+	<script src="js/facebook_js_sdk.js"></script>
+	<script src="js/sorting.js"></script>
+	<script src="js/populate.js"></script>
+	<script src="js/fbk-logic.js"></script>
+	<script src="js/init.js"></script>
+	<script src="js/eventhandlers.js"></script>
+	<script src="js/feedsearchlogic.js"></script>
 </head>
 
 
@@ -37,89 +39,85 @@
 	</div> -->
 
 
-	<div data-role="page" class="page" id="page1">
+	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="">
 		
-		<div data-role="header" data-theme="b" data-position="fixed" id="page1header">
-			<a data-role="button" id="page1fbkloginoutbutton" onclick="login()">Login</a>
-			<h2>Group Reader</h2>
-		</div>
-
 		<div data-role="content" id="page1content">
 			<div id="page1accordioncontainer"></div>
 		</div>
 
-		<div data-role="footer" id="page1footer" data-theme="b" data-position="fixed">
-			<div data-role="navbar" data-iconpos="top">
-				<ul>
-					<li>
-						<a class="ui-btn-active" href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
-					</li>
-					<li>
-						<a href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
-					</li>
-					<li>
-						<a href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
-					</li>
-				</ul>
-			</div>
-		</div>
 	</div>
 
 
-	<div data-role="page" class="page" id="page2">
+	<div data-role="page" class="page" id="page2" data-swipeleft="page3" data-swiperight="page1">
 		
-		<div data-role="header" data-theme="b" data-position="fixed" id="page2header">
-			<a data-role="button" id="page2fetchgroupbutton" onclick="fetchgroups($('#page2accordioncontainer'))">Fetch!</a>
-			<h2>Feed Directory</h2>
+		<div data-role="header" data-theme="b" data-position="inline" id="page2header" data-tap-toggle="false">
+			<div data-role="navbar" data-iconpos="none">
+				<ul>
+					<li>
+						<a href="" data-theme="b">Official</a>
+					</li>
+					<li>
+						<a href="" data-theme="b">Custom</a>
+					</li>
+					<li>
+						<a href="" data-theme="b">Current</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 
 		<div data-role="content" id="page2content">
-			<div id="page2accordioncontainer"></div>
+			<div id="searchBarContainer" style="padding-bottom: 0.9em;">
+				<form id="searchForm">
+				<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
+				<input type="search" name="search" id="feedSearchBar" data-mini="true" data-theme="b" />
+				<input type="submit" id="startSearchButton" label="Submit" data-role="none" />
+				</form>
+			</div>
+			
+			<div id="feedList">
+				<ul data-role="listview" id="feedLinkList"></ul>
+			</div>
+
 		</div>
 
-		<div data-role="footer" id="page2footer" data-theme="b" data-position="fixed">
-			<div data-role="navbar" data-iconpos="top">
-				<ul>
-					<li>
-						<a href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
-					</li>
-					<li>
-						<a class="ui-btn-active" href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
-					</li>
-					<li>
-						<a href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
-					</li>
-				</ul>
-			</div>
-		</div>
 	</div>
 		
-	<div data-role="page" class="page" id="page3">
+	<div data-role="page" class="page" id="page3"  data-swipeleft="" data-swiperight="page2">
 		
-		<div data-role="header" data-theme="b" data-position="fixed" id="page3header">
-			<h3>Settings</h3>
-		</div>
-
 		<div data-role="content" id="page3content">
-			<div id="page3accordioncontainer"></div>
+			<div id="settingsContainer">
+				
+			</div>
 		</div>
-
-		<div data-role="footer" id="page3footer" data-theme="b" data-position="fixed">
-			<div data-role="navbar" data-iconpos="top">
+	
+	</div>
+	
+	<div data-role="page" class="page" id="page4"  data-swipeleft="page2" data-swiperight="page2">
+		
+		<div data-role="header" data-theme="b" data-position="inline" id="page4header" data-tap-toggle="false">
+			<div data-role="navbar" data-iconpos="none">
 				<ul>
 					<li>
-						<a href="#page1" data-theme="b" data-icon="home" data-transition="pop">Unify</a>
+						<a href="" data-theme="b">Back</a>
 					</li>
 					<li>
-						<a href="#page2" data-theme="b" data-icon="plus" data-transition="pop">Feeds</a>
-					</li>
-					<li>
-						<a class="ui-btn-active" href="#page3" data-theme="b" data-icon="gear" data-transition="pop">Settings</a>
+						<a href="" data-theme="b">Add Feed</a>
 					</li>
 				</ul>
 			</div>
 		</div>
-	</div>	
 		
+		<div data-role="content" id="page4content">
+			<div id="postPreviewContainerWrapper">
+				<div id="postPreviewContainer">
+					<ul data-role="listview" id="previewPostList"></ul>
+				</div>
+			</div>
+		</div>
+	
+	</div>	
+	
+	
 </body>
 </html>

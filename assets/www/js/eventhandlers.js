@@ -1,21 +1,34 @@
 document.addEventListener('deviceready', function(){
 	
+	console.log("deviceready fired")
+	
 	$.mobile.defaultPageTransition = 'none';
 	$.mobile.defaultDialogTransition = 'none';
 	
-	console.log("deviceready fired")
+	$('.page').on('swipeleft', function(){
+		toPageHash = '#' + $(this).attr("data-swipeleft")
+		$.mobile.changePage(toPageHash)
+	})
+	
+	$('.page').on('swiperight', function(){
+		toPageHash = '#' + $(this).attr("data-swiperight")
+		$.mobile.changePage(toPageHash)
+	})
+	
+	$('.page').on('pageshow', function () {
+		console.log("pageshow fired on " + this.id)
+    	eval(this.id + 'init()')
+	 });
+
 	fbinit()
 	
-	document.addEventListener("backbutton", function(){});
-	
-    $(".page").on('pageshow', function(){
-    	console.log("pageshow fired on " + this.id)
-    	eval(this.id + 'init()')
-    })
-    
-    $('#page1').trigger('pageshow')
 
-    })
+	
+	// document.addEventListener("backbutton", function(){});
+    
+	$('#page1').trigger('pageshow')
+
+})
 
 
 // adds an event listener for resume which decides which page we're on and starts the init script for that page.
@@ -26,3 +39,4 @@ document.addEventListener('deviceready', function(){
 $(document).ready(function(){
 	$("a").attr("data-transition", "none");
 })
+

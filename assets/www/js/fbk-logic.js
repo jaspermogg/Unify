@@ -65,9 +65,8 @@
 						$('#'+pageid+'feed' + (i) + 'bar').find('*').attr("data-fbid", item.id);
 						$('#'+pageid+'feed' + (i) + 'bar').attr("data-fbid", item.id).attr("feedtype","fbk").find('.ui-btn-text').html(item.name);
 						$('#'+pageid+'feed' + (i) + 'bar span:first').prepend('<img src='+item.picture+' class="hdricon" width="18px" data-fbid='+item.id+' />');
-						$('#'+pageid+'accordion a:first').trigger('click');
 					};
-
+					
 				};
 			});
 		}

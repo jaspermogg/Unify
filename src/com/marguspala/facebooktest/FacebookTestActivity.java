@@ -11,15 +11,15 @@ public class FacebookTestActivity extends DroidGap {
 	
 	
     //remove this line in production
-	private static FacebookTestActivity instance;
+//	private static FacebookTestActivity instance;
 	
 	//keep
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	 
          //remove these lines in production
-		instance = this;
-        FacebookTestActivity.getInstance().clearApplicationData();
+//		instance = this;
+//        FacebookTestActivity.getInstance().clearApplicationData();
         
     	//keep        
     	super.onCreate(savedInstanceState);
@@ -29,36 +29,36 @@ public class FacebookTestActivity extends DroidGap {
 
     
 //remove to end in production
-	public static FacebookTestActivity getInstance() {
-		return instance;
-	}
-
-	public void clearApplicationData() {
-		File cache = getCacheDir();
-		File appDir = new File(cache.getParent());
-		if (appDir.exists()) {
-			String[] children = appDir.list();
-			for (String s : children) {
-				if (!s.equals("lib")) {
-					deleteDir(new File(appDir, s));
-					Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
-				}
-			}
-		}
-	}
-
-	public static boolean deleteDir(File dir) {
-		if (dir != null && dir.isDirectory()) {
-			String[] children = dir.list();
-			for (int i = 0; i < children.length; i++) {
-				boolean success = deleteDir(new File(dir, children[i]));
-				if (!success) {
-					return false;
-				}
-			}
-		}
-
-		return dir.delete();
-	}
+//	public static FacebookTestActivity getInstance() {
+//		return instance;
+//	}
+//
+//	public void clearApplicationData() {
+//		File cache = getCacheDir();
+//		File appDir = new File(cache.getParent());
+//		if (appDir.exists()) {
+//			String[] children = appDir.list();
+//			for (String s : children) {
+//				if (!s.equals("lib")) {
+//					deleteDir(new File(appDir, s));
+//					Log.i("TAG", "**************** File /data/data/APP_PACKAGE/" + s + " DELETED *******************");
+//				}
+//			}
+//		}
+//	}
+//
+//	public static boolean deleteDir(File dir) {
+//		if (dir != null && dir.isDirectory()) {
+//			String[] children = dir.list();
+//			for (int i = 0; i < children.length; i++) {
+//				boolean success = deleteDir(new File(dir, children[i]));
+//				if (!success) {
+//					return false;
+//				}
+//			}
+//		}
+//
+//		return dir.delete();
+//	}
 	
 }

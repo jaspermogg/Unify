@@ -7,3 +7,7 @@
     margin-top: -1px;
     position: absolute;
 }
+
+#startSearchButton{
+	display:none;
+}
