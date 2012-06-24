@@ -89,5 +89,5 @@ cordova.addConstructor(function() {
 });
 
 function openChildBrowser(URL){
-	window.plugins.childBrowser.showWebPage(URL)
+	window.plugins.childBrowser.showWebPage(URL, {showLocationBar: false})
 }
