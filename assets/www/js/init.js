@@ -11,6 +11,8 @@ function page1init() {
 function page2init() {
 	console.log("page 2 initialised")
 	
+	$('div#page4content li').remove()
+	
 	$('form#searchForm').on('submit', function(event){
 	event.preventDefault()
 	userSearchFeeds($('input#feedSearchBar').val())
@@ -24,10 +26,9 @@ function page3init() {
 
 function page4init() {
 	console.log("page 4 initialised")
-	$('#postPreviewContainerWrapper a').one('click', function(event){
-	event.preventDefault();
 	
-	openChildBrowser($(event.target).attr("href"))
-	
+	$('#postPreviewContainerWrapper li, #postPreviewContainerWrapper a').off('click').on('click', function(event){
+	event.preventDefault()
+	openChildBrowser($(event.target).parents('li , h2').find('a').attr("data-uri"))
 	})
 }

@@ -28,6 +28,8 @@ document.addEventListener('deviceready', function(){
     
 	$('#page1').trigger('pageshow')
 
+
+
 })
 
 

@@ -15,35 +15,51 @@ function processFeedSearchResults(feedSearchResults){
 	} else {
 		$('div#feedList').replaceWith('<div id="feedList"><ul data-role="listview" id="feedLinkList"></ul></div>')
 		for(i=0;i < feedSearchResults.entries.length; i++){
-			titleHtml = '<li><a href="#page4" data-feedpreviewID="'+i+'" data-feedtype="RSS" data-URI="' + feedSearchResults.entries[i].url + '">' + '<h3>' + feedSearchResults.entries[i].title + '</h3>' + '<p><strong>' + 
+			titleHtml = '<li><a href="" data-feedpreviewid="'+i+'" data-feedtype="RSS" data-uri="' + feedSearchResults.entries[i].url + '">' + '<h3>' + feedSearchResults.entries[i].title + '</h3>' + '<p><strong>' + 
 			feedSearchResults.entries[i].url +'</strong><p><p>' + feedSearchResults.entries[i].contentSnippet + '</p></a></li>'
 			$('div#feedList').append(titleHtml)
 		}
 	}
 	
-	$('div#feedList').listview().find('a').on('click', function(){
-	$('div#postPreviewContainerWrapper').html('<div id="postPreviewContainer"><ul data-role="listview" id="previewPostList"></ul></div>')
-	var previewURI = $(this).attr("data-URI")
-	
+	$('div#feedList').listview().find('a').off('click').on('click', function(){
+	var previewURI = $(this).attr("data-uri")
+	var barID = $(this).attr("data-feedpreviewid")
 	console.log("opening" + previewURI)
 
 	var feedPreview = new google.feeds.Feed(previewURI)
 	
 	feedPreview.load(function(feedPreviewFetchResults){
 		var entries = feedPreviewFetchResults.feed.entries
+		
 		if(feedPreviewFetchResults.error){
 			console.log(JSON.stringify(feedPreviewFetchResults.error))
-			alert("Something went awry, but you should be able to continue. We're fighting tooth and nail against these bugs!'")
+			alert("That feed appears to be empty, sorry! I'll remove it from the list.")
+			$('div#feedList [data-feedpreviewid=' + barID + ']').parents('li').remove()
 		} else {
-			$('div#postPreviewContainerWrapper').prepend('<div id="postPreviewFeedSummary"><h2><a href="'+ feedPreviewFetchResults.feed.link +'">'+ feedPreviewFetchResults.feed.title +'</a></h2><h3>'+ feedPreviewFetchResults.feed.author +'</h3><p>'+ feedPreviewFetchResults.feed.description +'</p></div>')
-			for(i=0;i<entries.length;i++){
-				var previewPostHtml = '<li><a href="'+ entries[i].link +'" data-postPreviewID="previewpost' + i + '" data-feedtype="RSS"><p>' +
-				entries[i].contentSnippet + '</p></a></li>'
-				$('ul#previewPostList').append(previewPostHtml)
+
+			if ((JSON.stringify(entries)).indexOf(" ") == -1 ){
+				$('div#feedList [data-feedpreviewid=' + barID + ']').parents('li').remove()
+				alert("That feed appears to be empty, sorry! I'll remove it from the list.")
+				return false;
 			}
-		$('div#postPreviewContainer ul').listview().listview().listview()
-		$('div#postPreviewContainer ul').trigger('create').listview()
-		$('#page4').trigger('refresh')
+			
+			var previewPostHtml = ""
+			$('div#postPreviewFeedSummaryWrapper').html('<div id="postPreviewFeedSummary"><h2 data-uri="'+ feedPreviewFetchResults.feed.link +'"><a href="" data-uri="'+ feedPreviewFetchResults.feed.link +'">'+ feedPreviewFetchResults.feed.title +'</a></h2><h3>'+ feedPreviewFetchResults.feed.author +'</h3><p>'+ feedPreviewFetchResults.feed.description +'</p></div>')
+			for(i=0;i<entries.length;i++){
+				
+				if(entries[i].contentSnippet != ""){
+				previewPostHtml = previewPostHtml + '<li><a href="" data-uri="'+ entries[i].link +'" data-postpreviewid="previewpost' + i + '" data-feedtype="RSS"><p>' +
+				entries[i].contentSnippet + '</p></a></li>'
+				$('ul#previewPostList').html(previewPostHtml)
+
+				}
+				
+			}
+		$.mobile.changePage($('#page4'))		
+		console.log("makes it here")
+		$('ul#previewPostList').listview()
+		console.log("makes it here2")
+		$('ul#previewPostList').listview('refresh')
 		}
 	})
 
