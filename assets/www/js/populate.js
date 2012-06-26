@@ -11,26 +11,30 @@ function populateWhat(type, number){
 }
 
 function populateBars(barsnumber){
-	var currentpageid = $.mobile.activePage.attr("id")
-	var barshtml = '<div data-role="collapsible-set" data-theme="b" data-content-theme="b" data-mini="true" id="'+currentpageid+'accordion">';
+	
+	var currentPageId = $.mobile.activePage.attr("id")
+	
+	var barshtml = '<div data-role="collapsible-set" id="' + currentPageId + 'Accordion"><ul data-role="listview" data-theme="b">'
 	for ( var i = 0; i < barsnumber; i++){
 		standardcollapsed =
-			'<div data-role="collapsible" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-collapsed="true" id="'+currentpageid+'feed'+i+'bar" class="feedbar">' +
-			'<h3 id="'+currentpageid+'feed'+i+'title" class="feedtitle"> Loading...</h3>' +
-			'<div class="feedcontent" id="'+currentpageid+'feed'+i+'">' +
+			'<div data-role="collapsible" data-collapsed="true" id="'+currentPageId+'feed'+i+'bar" class="feedbar">' +
+			'<h3 id="'+currentPageId+'feed'+i+'title" class="feedtitle"> Loading...</h3>' +
+			'<div class="feedcontent" id="'+currentPageId+'feed'+i+'">' +
 			'</div>' +
 			'</div>'
 		barshtml += standardcollapsed
 	};
-	barshtml += '</div>';
-	var accordioncontainer = $('#' + currentpageid + 'accordioncontainer')
+	
+	barshtml += '</ul></div>';
+	var accordioncontainer = $('#' + currentPageId + 'AccordionContainer')
 	accordioncontainer.empty();
 	accordioncontainer.html(barshtml);
-	// $('#accordion div:first').attr("data-collapsed", "false");
 	accordioncontainer.trigger("create");
-	$('.ui-collapsible-heading-toggle').bind("click", function(event){feedfetch(event)})
 	$('.ui-collapsible-heading-toggle .ui-btn-text').addClass("hdrtext")
-	return currentpageid
+		
+	$(accordioncontainer).on('click', 'a', function(event){feedfetch(event)})
+		
+	return currentPageId
 }
 
 

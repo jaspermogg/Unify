@@ -11,3 +11,27 @@
 #startSearchButton{
 	display:none;
 }
+
+.ui-navbar{
+	border-top:1px solid;
+	margin-top: -2px;
+}
+
+.ui-navbar li .ui-btn:last-child
+{
+margin-right: -4px;
+border-right: 1px solid;
+}
+ 
+.singleButtonNavBar{
+ 	margin-right: 0px;
+ 	border-right: 1px solid;
+}
+
+.ui-bar-e{
+	border-bottom:1px solid #F4C63f;
+}
+
+.indicatorBarWrapper{
+	padding-bottom:2px;
+}

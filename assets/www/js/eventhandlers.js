@@ -1,18 +1,28 @@
+	var isTwitterSearch = false
+	var page1hasinited = false	
+	var page2hasinited = false
+	var page3hasinited = false
+
+
 document.addEventListener('deviceready', function(){
-	
+		
 	console.log("deviceready fired")
 	
 	$.mobile.defaultPageTransition = 'none';
 	$.mobile.defaultDialogTransition = 'none';
 	
 	$('.page').on('swipeleft', function(){
-		toPageHash = '#' + $(this).attr("data-swipeleft")
-		$.mobile.changePage(toPageHash)
+		if($(this).attr("data-swipeleft") != ""){
+			toPageHash = '#' + $(this).attr("data-swipeleft")
+			$.mobile.changePage(toPageHash)
+		}
 	})
 	
 	$('.page').on('swiperight', function(){
-		toPageHash = '#' + $(this).attr("data-swiperight")
-		$.mobile.changePage(toPageHash)
+		if($(this).attr("data-swiperight") != ""){
+			toPageHash = '#' + $(this).attr("data-swiperight")
+			$.mobile.changePage(toPageHash)
+		}
 	})
 	
 	$('.page').on('pageshow', function () {
@@ -22,13 +32,16 @@ document.addEventListener('deviceready', function(){
 
 	fbinit()
 	
-
+	$('#loginButton').off('click').on('click', function(){shibIsAuthed()})
+	$('#localStorageButton').off('click').on('click', function(){alert(JSON.stringify(localStorage))})
 	
-	// document.addEventListener("backbutton", function(){});
-    
-	$('#page1').trigger('pageshow')
+	// document.addEventListener("backbutton", function(){console.log("pressed the back button")});
 
+	$('#customFeedAddWrapper').hide()
+	$('#searchBarContainer').hide()
+	$('#confirmationButtons').hide()
 
+	$('#page0').trigger('pageshow')
 
 })
 

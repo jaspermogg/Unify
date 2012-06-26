@@ -1,3 +1,4 @@
+
 /*
 * cordova is available under *either* the terms of the modified BSD license *or* the
 * MIT License (2008). See http://opensource.org/licenses/alphabetical for full text.
@@ -79,7 +80,7 @@ ChildBrowser.prototype._onError = function(data) {
 */
 ChildBrowser.install = function(){
     return window.plugins.childBrowser;
-    };
+   };
 
 /**
 * Load ChildBrowser
@@ -88,6 +89,26 @@ cordova.addConstructor(function() {
     cordova.addPlugin("childBrowser", new ChildBrowser());
 });
 
-function openChildBrowser(URL){
-	window.plugins.childBrowser.showWebPage(URL, {showLocationBar: false})
+function openChildBrowser(URL, locBar){
+		
+	cb = window.plugins.childBrowser
+	
+	locBar == true ? cb.showWebPage(URL, {showLocationBar: true}) : cb.showWebPage(URL, {showLocationBar: true})
+	
+	if (URL == "https://m.ncl.ac.uk/secure/attributes.xml#initial"){
+		
+		cb.onLocationChange = function(loc){
+		loc == ("https://m.ncl.ac.uk/secure/attributes.xml") ? (cb.close(), console.log("close because URL = " + loc)) : console.log("location changed, stay open URL = " + loc)
+		}
+	
+		cb.onClose = function(){
+		console.log("CHILDBROWSER CLOSED!")
+		shibIsAuthed()
+		}
+	} else {
+		
+		
+		
+	}
+
 }

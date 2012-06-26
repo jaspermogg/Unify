@@ -127,7 +127,7 @@ public class ChildBrowser extends Plugin {
                 intent.putExtra("loadUrlTimeoutValue", 60000);
 
                 // These parameters can be configured if you want to show the loading dialog
-                intent.putExtra("loadingDialog", "Wait,Loading web page..."); // show loading dialog
+                intent.putExtra("loadingDialog", "Please wait - loading web page..."); // show loading dialog
                 intent.putExtra("hideLoadingDialogOnPageLoad", true); // hide it once page has completely loaded
             }
             else {
@@ -306,7 +306,8 @@ public class ChildBrowser extends Plugin {
                 WebSettings settings = webview.getSettings();
                 settings.setJavaScriptEnabled(true);
                 settings.setJavaScriptCanOpenWindowsAutomatically(true);
-                settings.setBuiltInZoomControls(true);
+
+                // settings.setBuiltInZoomControls(true);
                 settings.setPluginsEnabled(true);
                 settings.setDomStorageEnabled(true);
                 webview.loadUrl(url);
@@ -319,7 +320,10 @@ public class ChildBrowser extends Plugin {
                 toolbar.addView(back);
                 toolbar.addView(forward);
                 toolbar.addView(edittext);
+                
+                //TO-DO comment out or not?
                 toolbar.addView(close);
+                
                 
                 if (getShowLocationBar()) {
                     main.addView(toolbar);
@@ -391,7 +395,7 @@ public class ChildBrowser extends Plugin {
             }
             
             if (!newloc.equals(edittext.getText().toString())) {
-                edittext.setText(newloc);
+            	edittext.setText(newloc);
             }
             
             try {

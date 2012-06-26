@@ -16,7 +16,7 @@ function processFeedSearchResults(feedSearchResults){
 		$('div#feedList').replaceWith('<div id="feedList"><ul data-role="listview" id="feedLinkList"></ul></div>')
 		for(i=0;i < feedSearchResults.entries.length; i++){
 			titleHtml = '<li><a href="" data-feedpreviewid="'+i+'" data-feedtype="RSS" data-uri="' + feedSearchResults.entries[i].url + '">' + '<h3>' + feedSearchResults.entries[i].title + '</h3>' + '<p><strong>' + 
-			feedSearchResults.entries[i].url +'</strong><p><p>' + feedSearchResults.entries[i].contentSnippet + '</p></a></li>'
+			feedSearchResults.entries[i].link +'</strong><p><p class="contentSnippet">' + feedSearchResults.entries[i].contentSnippet + '</p></a></li>'
 			$('div#feedList').append(titleHtml)
 		}
 	}
@@ -25,6 +25,7 @@ function processFeedSearchResults(feedSearchResults){
 	var previewURI = $(this).attr("data-uri")
 	var barID = $(this).attr("data-feedpreviewid")
 	console.log("opening" + previewURI)
+	var shortDescription = $(this).find('p.contentSnippet').text()
 
 	var feedPreview = new google.feeds.Feed(previewURI)
 	
@@ -44,12 +45,18 @@ function processFeedSearchResults(feedSearchResults){
 			}
 			
 			var previewPostHtml = ""
-			$('div#postPreviewFeedSummaryWrapper').html('<div id="postPreviewFeedSummary"><h2 data-uri="'+ feedPreviewFetchResults.feed.link +'"><a href="" data-uri="'+ feedPreviewFetchResults.feed.link +'">'+ feedPreviewFetchResults.feed.title +'</a></h2><h3>'+ feedPreviewFetchResults.feed.author +'</h3><p>'+ feedPreviewFetchResults.feed.description +'</p></div>')
+			
+			$('div#postPreviewFeedSummaryWrapper').html('<div id="postPreviewFeedSummary"><h2 data-uri="'+ feedPreviewFetchResults.feed.link +'"><a href="" data-uri="'+
+			feedPreviewFetchResults.feed.link +'">'+ feedPreviewFetchResults.feed.title +'</a></h2><h3>'+ feedPreviewFetchResults.feed.author +'</h3><p>'+
+			shortDescription +'</p></div>')
+			
 			for(i=0;i<entries.length;i++){
 				
+				var formattedDate = entries[i].publishedDate
+				
 				if(entries[i].contentSnippet != ""){
-				previewPostHtml = previewPostHtml + '<li><a href="" data-uri="'+ entries[i].link +'" data-postpreviewid="previewpost' + i + '" data-feedtype="RSS"><p>' +
-				entries[i].contentSnippet + '</p></a></li>'
+				previewPostHtml = previewPostHtml + '<li><a href="" data-uri="'+ entries[i].link +'" data-postpreviewid="previewpost' + i + '" data-feedtype="RSS"><h3>' + formattedDate +
+				'</h3><p>' +	entries[i].contentSnippet + '</p></a></li>'
 				$('ul#previewPostList').html(previewPostHtml)
 
 				}
@@ -66,3 +73,5 @@ function processFeedSearchResults(feedSearchResults){
 })
 
 }
+
+//TO-DO Find further feed results by appending -"result1title" -"result2title" etc to search query.

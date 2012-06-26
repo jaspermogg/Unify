@@ -1,7 +1,10 @@
 package com.marguspala.facebooktest;
 
-import org.apache.cordova.DroidGap;
+
 import android.os.Bundle;
+//allows cookie setting
+// import android.webkit.CookieManager;
+import org.apache.cordova.DroidGap;
 //required for cleaning out appData each time app starts.
 import java.io.File;
 import android.util.Log;
@@ -21,6 +24,8 @@ public class FacebookTestActivity extends DroidGap {
 //		instance = this;
 //        FacebookTestActivity.getInstance().clearApplicationData();
         
+    	//allows cookie setting
+    	// CookieManager.setAcceptFileSchemeCookies(true);
     	//keep        
     	super.onCreate(savedInstanceState);
         super.loadUrl("file:///android_asset/www/index.html");

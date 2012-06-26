@@ -4,15 +4,17 @@
 	<title>Cordova Facebook</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script src="https://www.google.com/jsapi"></script>
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" />
-	<link rel="stylesheet" href="css/android-theme.css" />
+<!-- 	<link rel="stylesheet" href="css/android-theme.css" /> -->
+	<link rel="stylesheet" href="css/custom-jqm-theme.min.css"/>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" />
+<!-- 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" /> -->
 	<link rel="stylesheet" href="css/my.css" />
 	<script src="js/cordova-1.8.1.js"></script>
-	<script src="js/childbrowser.js"></script>
 	<script src="js/jquery-1.7.2.js"></script>
-	<script src="js/jquery.mobile.android-theme.js"></script>
+<!-- 	<script src="js/jquery.mobile.android-theme.js"></script> -->
 	<script src="js/jquery-mobile-customisation.js"></script>
 	<script src="js/jquery.mobile-1.1.0.js"></script>
+	<script src="js/jqm.autoComplete-1.4.js"></script>
 	<script src="js/cdv-plugin-fb-connect.js"></script>
 	<script src="js/facebook_js_sdk.js"></script>
 	<script src="js/sorting.js"></script>
@@ -21,28 +23,66 @@
 	<script src="js/init.js"></script>
 	<script src="js/eventhandlers.js"></script>
 	<script src="js/feedsearchlogic.js"></script>
+	<script src="js/childbrowser.js"></script>
+	<script src="js/NCLauthenticate.js"></script>
+	<script src="js/xmltojson.js"></script>
+	<script src="js/auth.js"></script>
+	<script src="js/misc.js"></script>
+	<script src="js/feedSelectorViews.js"></script>
 </head>
 
 
 <body>
 	
-<!-- 	<div data-role="page" class="page" id="page0">
-	
+	<div data-role="page" class="page" id="page0">
+		
+		<div data-role="header" data-theme="b" data-position="inline" id="page0header" data-tap-toggle="false">
+			<h2>Welcome to Unify</h2>
+		</div>
 
 		<div data-role="content" id="page1content">
+			<h3 id="welcomeText"></h3>
+			<h2>Choose your institution from the list below.</h2>
+<!-- 			<input type="button" value="Let's go!" id="loginButton" />
+			<input type="button" value="Alert localStorage" id="localStorageButton" /> -->
 			
-			
+		<div id="institutionSearchWrapper">
+				<input type="search" id="institutionSearchField" placeholder="Choose your institution...">
+				<ul id="institutionSuggestions" data-role="listview" data-inset="true"></ul>	      
+		</div>
 			
 		</div>
 
 		
-	</div> -->
+	</div>
 
-
-	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="">
+	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="page3">
+		
+		<div data-role="header" data-theme="b" data-position="fixed" id="page1header" data-tap-toggle="false">
+			
+			<div class="ui-grid-b indicatorBarWrapper">
+				<div class="indicatorBar ui-block-b iB-left"><div class="ui-bar ui-bar-e"></div></div>
+				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar"></div></div>
+				<div class="indicatorBar iB-right ui-block-b"><div class="ui-bar"></div></div>
+			</div>
+			
+			<div data-role="navbar" data-iconpos="none">
+				<ul>
+					<li>
+						<a class="ui-btn-active" href="" data-theme="b">By Feed</a>
+					</li>
+					<li>
+						<a href="" data-theme="b">By Recent</a>
+					</li>
+					<li>
+						<a href="" data-theme="b">By Type</a>
+					</li>
+				</ul>
+			</div>
+		</div>
 		
 		<div data-role="content" id="page1content">
-			<div id="page1accordioncontainer"></div>
+			<div id="page1AccordionContainer"></div>
 		</div>
 
 	</div>
@@ -50,23 +90,70 @@
 
 	<div data-role="page" class="page" id="page2" data-swipeleft="page3" data-swiperight="page1">
 		
-		<div data-role="header" data-theme="b" data-position="inline" id="page2header" data-tap-toggle="false">
+		<div data-role="header" data-theme="b" data-position="fixed" id="page2header" data-tap-toggle="false">
+			
+			<div class="ui-grid-b indicatorBarWrapper">
+				<div class="indicatorBar iB-left ui-block-b"></div>
+				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-e"></div></div>
+				<div class="indicatorBar iB-right ui-block-b"></div>
+			</div>
+			
 			<div data-role="navbar" data-iconpos="none">
 				<ul>
 					<li>
-						<a href="" data-theme="b">Official</a>
+						<a class="ui-btn-active" href="" data-theme="b" id="feedSelectorViewOfficial">Official</a>
 					</li>
 					<li>
-						<a href="" data-theme="b">Custom</a>
+						<a href="" data-theme="b" id="feedSelectorViewCustom">Custom</a>
 					</li>
 					<li>
-						<a href="" data-theme="b">Current</a>
+						<a href="" data-theme="b" id="feedSelectorViewCurrent">Current</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 
+
+
 		<div data-role="content" id="page2content">
+			
+			<div id="confirmationButtons">
+				<!-- <div class="ui-grid-a">
+					<div class="ui-block-a">
+						<a data-role="button" id="feedSearchCancel">Cancel</a>
+					</div>
+					<div class="ui-block-b"> -->
+						<a data-role="button" id="feedSearchDone">Done</a>
+					<!--</div> -->
+				<!-- </div> -->
+				<br />
+			</div>
+			
+			<div id="officialFeedWrapper">
+				<ul data-role="listview" id="officialFeedContainer">
+				</ul>
+			</div>
+			
+			<div id="customFeedAddWrapper">
+			<br />
+			<a data-role="button" id="genericFeedSearch">Search for RSS Feeds</a>
+			<br />
+			<a data-role="button" id="twitterFeedSearch">Search for Twitter Feeds</a>
+			<br />
+			<a data-role="button" id="facebookFeedSearch">Search for Facebook Feeds</a>
+			<br />
+			<a data-role="button" id="urlFeedSearch">Add a feed by URL</a>
+			</div>
+			
+			<div id="facebookGroupWrapper">
+				<div id="page2AccordionContainer"></div>
+			</div>
+			
+			<div id="currentFeedWrapper">
+				<ul data-role="listview" id="currentFeedContainer">
+				</ul>
+			</div>
+			
 			<div id="searchBarContainer" style="padding-bottom: 0.9em;">
 				<form id="searchForm">
 				<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
@@ -83,11 +170,38 @@
 
 	</div>
 		
-	<div data-role="page" class="page" id="page3"  data-swipeleft="" data-swiperight="page2">
 		
+		
+	<div data-role="page" class="page" id="page3"  data-swipeleft="page1" data-swiperight="page2">
+		
+		<div data-role="header" data-theme="b" data-position="fixed" id="page3header" data-tap-toggle="false">
+			
+			<div class="ui-grid-b indicatorBarWrapper">
+				<div class="indicatorBar iB-left ui-block-b"></div>
+				<div class="indicatorBar iB-middle ui-block-b"></div>
+				<div class="indicatorBar iB-right ui-block-b"><div class="ui-bar ui-bar-e"></div></div>
+			</div>
+			
+		<div data-role="navbar" data-iconpos="none" class="singleButtonNavBar">
+				<ul>
+					<li>
+						<a href="" data-theme="b">Settings</a>
+					</li>
+						</ul>
+			</div>
+		</div>	
+
 		<div data-role="content" id="page3content">
 			<div id="settingsContainer">
-				
+				<div data-role="collapsible" data-collapsed="false">
+					<h3>Section 1</h3>
+					<p>I'm the collapsible set content for section B.</p>
+					</div>
+					
+					<div data-role="collapsible">
+					<h3>Section 2</h3>
+					<p>I'm the collapsible set content for section B.</p>
+				</div>
 			</div>
 		</div>
 	
@@ -95,14 +209,14 @@
 	
 	<div data-role="page" class="page" id="page4"  data-swipeleft="page2" data-swiperight="page2">
 		
-		<div data-role="header" data-theme="b" data-position="inline" id="page4header" data-tap-toggle="false">
+		<div data-role="header" data-position="fixed" id="page4header" data-tap-toggle="false">
 			<div data-role="navbar" data-iconpos="none">
 				<ul>
 					<li>
-						<a href="" data-theme="b">Back</a>
+						<a href="" data-theme="d" id="page4backButton">Back</a>
 					</li>
 					<li>
-						<a href="" data-theme="b">Add Feed</a>
+						<a href="" data-theme="e" id="page4addFeedButton">Add Feed</a>
 					</li>
 				</ul>
 			</div>
