@@ -117,17 +117,7 @@
 
 		<div data-role="content" id="page2content">
 			
-			<div id="confirmationButtons">
-				<!-- <div class="ui-grid-a">
-					<div class="ui-block-a">
-						<a data-role="button" id="feedSearchCancel">Cancel</a>
-					</div>
-					<div class="ui-block-b"> -->
-						<a data-role="button" id="feedSearchDone">Done</a>
-					<!--</div> -->
-				<!-- </div> -->
-				<br />
-			</div>
+
 			
 			<div id="officialFeedWrapper">
 				<ul data-role="listview" id="officialFeedContainer">
@@ -135,35 +125,60 @@
 			</div>
 			
 			<div id="customFeedAddWrapper">
-			<br />
-			<a data-role="button" id="genericFeedSearch">Search for RSS Feeds</a>
-			<br />
-			<a data-role="button" id="twitterFeedSearch">Search for Twitter Feeds</a>
-			<br />
-			<a data-role="button" id="facebookFeedSearch">Search for Facebook Feeds</a>
-			<br />
-			<a data-role="button" id="urlFeedSearch">Add a feed by URL</a>
-			</div>
+				
+				<div id="customFeedAddConfirmationButtons">
+					<a data-role="button" id="feedSearchDone">Done</a>
+					<br />
+				</div>
+								
+				<div id="customFeedAddButtons">
+					<br />
+					<a data-role="button" id="genericFeedSearch">Search for RSS Feeds</a>
+					<br />
+					<a data-role="button" id="twitterFeedSearch">Search for Twitter Feeds</a>
+					<br />
+					<a data-role="button" id="siteFeedSearch">Search for Feeds From a Site</a>
+					<br />
+					<a data-role="button" id="facebookFeedSearch">Choose Facebook Feeds</a>
+					<br />
+					<a data-role="button" id="urlFeedSearch">Add a Feed by URL</a>
+				</div>
+				
 			
-			<div id="facebookGroupWrapper">
-				<div id="page2AccordionContainer"></div>
+				<div id="facebookGroupWrapper">
+					<div id="page2AccordionContainer"></div>
+				</div>
+				
+				<div id="currentFeedWrapper">
+					<ul data-role="listview" id="currentFeedContainer">
+					</ul>
+				</div>
+				
+				<div id="searchBarContainer" style="padding-bottom: 0.9em;">
+					<form id="searchForm">
+					<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
+					<input type="search" name="search" id="feedSearchBar" data-mini="true" data-theme="b" />
+					<input type="submit" id="startSearchButton" label="Submit" data-role="none" />
+					</form>
+				</div>
+				
+				<div id="urlBarContainer" style="padding-bottom: 0.9em;">
+					<form id="customUrlForm">
+					<label for="startUrlSearchButton" class="ui-hidden-accessible">Type a URL here...</label>
+					<input type="search" name="URL" id="customUrlInput" data-mini="true" data-theme="b" />
+					<input type="submit" id="startUrlSearchButton" label="Submit" data-role="none" />
+					</form>
+				</div>
+				
+				<div id="feedList">
+					<ul data-role="listview" id="feedLinkList"></ul>
+				</div>
+							
 			</div>
 			
 			<div id="currentFeedWrapper">
 				<ul data-role="listview" id="currentFeedContainer">
 				</ul>
-			</div>
-			
-			<div id="searchBarContainer" style="padding-bottom: 0.9em;">
-				<form id="searchForm">
-				<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
-				<input type="search" name="search" id="feedSearchBar" data-mini="true" data-theme="b" />
-				<input type="submit" id="startSearchButton" label="Submit" data-role="none" />
-				</form>
-			</div>
-			
-			<div id="feedList">
-				<ul data-role="listview" id="feedLinkList"></ul>
 			</div>
 
 		</div>

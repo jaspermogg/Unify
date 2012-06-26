@@ -1,8 +1,8 @@
-	var isTwitterSearch = false
+	var searchType = ""
 	var page1hasinited = false	
 	var page2hasinited = false
 	var page3hasinited = false
-
+	var isUserCloseAction = false
 
 document.addEventListener('deviceready', function(){
 		
@@ -39,7 +39,8 @@ document.addEventListener('deviceready', function(){
 
 	$('#customFeedAddWrapper').hide()
 	$('#searchBarContainer').hide()
-	$('#confirmationButtons').hide()
+	$('#customFeedAddConfirmationButtons').hide()
+	$('#urlBarContainer').hide()
 
 	$('#page0').trigger('pageshow')
 

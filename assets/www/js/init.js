@@ -1,6 +1,10 @@
 function page0init(){
 	console.log("page 0 initialised")
 	
+	
+	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : function(){}
+	
+		
 	$("#institutionSearchField").autocomplete({
 	    method: 'GET', // allows POST as well
 	    icon: 'arrow-r', // option to specify icon
@@ -45,11 +49,11 @@ function page1init() {
 	}
 	//position bar code [end]
 	
-	if(fbkisloggedin()){
-		fbafterinit(true);
-	} else {
-		fbafterinit(false);
-	}
+	// if(fbkisloggedin()){
+		// fbafterinit(true);
+	// } else {
+		// fbafterinit(false);
+	// }
 	
 	$('#page1accordioncontainer').on('click', 'a:not(.ui-collapsible-heading-toggle)', function(event){
 	event.preventDefault()
@@ -60,7 +64,6 @@ function page1init() {
 }
 
 function page2init() {
-
 	
 	console.log("page 2 initialised")
 	
@@ -75,11 +78,20 @@ function page2init() {
 	$('#page2 div.iB-middle').width(bigWidth)
 	}
 	//position bar code [end]
+
+	$('form#searchForm').off('submit').on('submit', function(event){
+		event.preventDefault()
 		
-	$('form#searchForm').on('submit', function(event){
-	event.preventDefault()
-	userSearchFeeds($('input#feedSearchBar').val())
-	return false
+		switch(searchType){
+			case "twitter":
+				userSearchFeeds('site:twitter.com ' + $('input#feedSearchBar').val())
+				break;
+			case "site":
+				userSearchFeeds('site:' + $('input#feedSearchBar').val())
+				break;
+			default:
+				userSearchFeeds($('input#feedSearchBar').val())
+		}
 	})
 	
 	$('#feedSelectorViewOfficial').off('click').on('click', feedSelectorViewOfficial)	

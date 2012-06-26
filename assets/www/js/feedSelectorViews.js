@@ -7,45 +7,69 @@ function feedSelectorViewOfficial(){
 function feedSelectorViewCustom(){
 	
 	$('#customFeedAddWrapper').show()
+	
 	$('#genericFeedSearch').off('click').on('click', function(){
-		window.isTwitterSearch = false
-		$('#customFeedAddWrapper').hide()
+		window.searchType = "default"
+		$('#customFeedAddButtons').hide()
 		$('#searchBarContainer').show()
-		$('#confirmationButtons').show()
+		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
-			$('#customFeedAddWrapper').show()
+			$('#customFeedAddButtons').show()
 			$('#searchBarContainer').hide()
-			$('#confirmationButtons').hide()
+			$('#customFeedAddConfirmationButtons').hide()
 			$('#feedList').hide()
 		})
 	})
 	
 	$('#twitterFeedSearch').off('click').on('click', function(){
-		window.isTwitterSearch = true
-		$('#customFeedAddWrapper').hide()
+		window.searchType = "twitter"
+		$('#customFeedAddButtons').hide()
 		$('#searchBarContainer').show()
-		$('#confirmationButtons').show()
+		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
-			$('#customFeedAddWrapper').show()
+			$('#customFeedAddButtons').show()
 			$('#searchBarContainer').hide()
-			$('#confirmationButtons').hide()
+			$('#customFeedAddConfirmationButtons').hide()
 			$('#feedList').hide()
 		})
 	})
 	
 	$('#facebookFeedSearch').off('click').on('click', function(){
-		$('#customFeedAddWrapper').hide()
+		$('#customFeedAddButtons').hide()
 		fetchgroups($('#page2 #page2AccordionContainer'), "feeds")
-		$('#confirmationButtons').show()
+		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
-			$('#customFeedAddWrapper').show()
+			$('#customFeedAddButtons').show()
 			$('#facebookGroupWrapper').hide()
-			$('#confirmationButtons').hide()
+			$('#customFeedAddConfirmationButtons').hide()
 		})
 	})
 	
 	$('#urlFeedSearch').off('click').on('click', function(){
-		$('#customFeedAddWrapper').hide()
+		window.searchType = "url"
+		$('#customFeedAddConfirmationButtons').show()
+		$('#customFeedAddButtons').hide()
+		$('#urlBarContainer').show()
+		
+		$('#feedSearchDone').off('click').on('click', function(){
+			$('#customFeedAddButtons').show()
+			$('#urlBarContainer').hide()
+			$('#customFeedAddConfirmationButtons').hide()
+		})
+		
+	})
+
+	$('#siteFeedSearch').off('click').on('click', function(){
+		window.searchType = "site"
+		$('#customFeedAddButtons').hide()
+		$('#searchBarContainer').show()
+		$('#customFeedAddConfirmationButtons').show()
+		$('#feedSearchDone').off('click').on('click', function(){
+			$('#customFeedAddButtons').show()
+			$('#searchBarContainer').hide()
+			$('#customFeedAddConfirmationButtons').hide()
+			$('#feedList').hide()
+		})
 	})
 	
 }

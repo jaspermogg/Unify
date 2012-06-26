@@ -89,25 +89,28 @@ cordova.addConstructor(function() {
     cordova.addPlugin("childBrowser", new ChildBrowser());
 });
 
-function openChildBrowser(URL, locBar){
+function openChildBrowser(URL, locBar, closeOnly){
 		
 	cb = window.plugins.childBrowser
 	
-	locBar == true ? cb.showWebPage(URL, {showLocationBar: true}) : cb.showWebPage(URL, {showLocationBar: true})
+	cb.showWebPage(URL, {"showLocationBar": locBar, "showCloseOnly" : closeOnly})
 	
 	if (URL == "https://m.ncl.ac.uk/secure/attributes.xml#initial"){
 		
 		cb.onLocationChange = function(loc){
 		loc == ("https://m.ncl.ac.uk/secure/attributes.xml") ? (cb.close(), console.log("close because URL = " + loc)) : console.log("location changed, stay open URL = " + loc)
+		loc.search("###") != -1 ? (isUserCloseAction=true, cb.close()) : console.log("url not equal to close")
 		}
 	
 		cb.onClose = function(){
-		console.log("CHILDBROWSER CLOSED!")
-		shibIsAuthed()
-		}
+		
+		isUserCloseAction ? (console.log("CHILDBROWSER CLOSED - user"), isUserCloseAction = false) : (console.log("CHILDBROWSER CLOSED - program"), shibIsAuthed(true))
+		} 
 	} else {
 		
-		
+	cb.onLocationChange = function(loc){
+		loc.search("###") != -1 ? cb.close() : console.log("url not equal to close")
+		}
 		
 	}
 

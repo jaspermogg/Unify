@@ -50,6 +50,7 @@ public class ChildBrowser extends Plugin {
     private WebView webview;
     private EditText edittext;
     private boolean showLocationBar = true;
+    private boolean showCloseOnly = false;
 
     /**
 * Executes the request and returns PluginResult.
@@ -142,13 +143,19 @@ public class ChildBrowser extends Plugin {
         }
     }
 
+//    allows tracking of close by x-click
+    private void userCloseDialog() {
+    	this.webview.loadUrl(edittext.getText().toString() + "###");
+    	this.webview.loadUrl(edittext.getText().toString() + "###");
+    }
+    
     /**
 * Closes the dialog
 */
     private void closeDialog() {
-        if (dialog != null) {
+    	   	if (dialog != null) {
             dialog.dismiss();
-        }
+    	}
     }
 
     /**
@@ -196,7 +203,14 @@ public class ChildBrowser extends Plugin {
         return this.showLocationBar;
     }
 
+
+
+    private boolean getShowCloseOnly() {
+        return this.showCloseOnly;
+    }
+    
     /**
+     * 
 * Display a new browser with the specified URL.
 *
 * @param url The url to load.
@@ -206,6 +220,7 @@ public class ChildBrowser extends Plugin {
         // Determine if we should hide the location bar.
         if (options != null) {
             showLocationBar = options.optBoolean("showLocationBar", true);
+            showCloseOnly = options.optBoolean("showCloseOnly", true);
         }
         
         // Create dialog in new thread
@@ -288,7 +303,7 @@ public class ChildBrowser extends Plugin {
                 ImageButton close = new ImageButton(ctx.getContext());
                 close.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        closeDialog();
+                        userCloseDialog();
                     }
                 });
                 close.setId(4);
@@ -316,15 +331,16 @@ public class ChildBrowser extends Plugin {
                 webview.setLayoutParams(wvParams);
                 webview.requestFocus();
                 webview.requestFocusFromTouch();
-                
-                toolbar.addView(back);
-                toolbar.addView(forward);
-                toolbar.addView(edittext);
+
+                if (!getShowCloseOnly()) {
+                	toolbar.addView(back);
+                    toolbar.addView(forward);
+                    toolbar.addView(edittext);
+                }         
                 
                 //TO-DO comment out or not?
                 toolbar.addView(close);
-                
-                
+                                
                 if (getShowLocationBar()) {
                     main.addView(toolbar);
                 }
@@ -388,7 +404,7 @@ public class ChildBrowser extends Plugin {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
             String newloc;
-            if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:")) {
+            if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("file:") || url.endsWith("###")) {
                 newloc = url;
             } else {
                 newloc = "http://" + url;

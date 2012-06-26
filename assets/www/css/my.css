@@ -8,7 +8,7 @@
     position: absolute;
 }
 
-#startSearchButton{
+#startSearchButton, #startUrlSearchButton{
 	display:none;
 }
 
