@@ -9,18 +9,19 @@
 }
 
 #startSearchButton, #startUrlSearchButton{
-	display:none;
+	height:0px;
+	width: 0px;
+	visibility:hidden;
 }
 
 .ui-navbar{
-	border-top:1px solid;
+/*	border-top:1px solid;*/
 	margin-top: -2px;
 }
 
-.ui-navbar li .ui-btn:last-child
-{
-margin-right: -4px;
-border-right: 1px solid;
+.ui-navbar li .ui-btn:last-child{
+	margin-right: -4px;
+	border-right: 1px solid;
 }
  
 .singleButtonNavBar{
@@ -28,10 +29,17 @@ border-right: 1px solid;
  	border-right: 1px solid;
 }
 
-.ui-bar-e{
+/*.ui-bar-e{
 	border-bottom:1px solid #F4C63f;
+}*/
+
+.ui-bar-f{
+	/*border-bottom:1px solid #F4C63f;*/
+
+	height:7px;
 }
 
 .indicatorBarWrapper{
-	padding-bottom:2px;
+	height:7px;
+/*	margin-bottom:-9px;*/
 }

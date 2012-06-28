@@ -25,5 +25,5 @@ function authenticate(){
 }
 
 function shibLoginPage(){
-	openChildBrowser("https://m.ncl.ac.uk/secure/attributes.xml#initial", true, true)
+	openChildBrowser("https://m.ncl.ac.uk/secure/attributes.xml#initial", true, false, false, true)
 }

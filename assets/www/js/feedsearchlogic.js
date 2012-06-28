@@ -11,7 +11,7 @@ function userSearchFeeds(feedSearchString){
 function processFeedSearchResults(feedSearchResults){
 	
 	if(feedSearchResults.error){
-		alert(feedSearchResults.error)
+		alert(JSON.stringify(feedSearchResults.error))
 	} else {
 		$('div#feedList').replaceWith('<div id="feedList"><ul data-role="listview" id="feedLinkList"></ul></div>')
 		for(i=0;i < feedSearchResults.entries.length; i++){

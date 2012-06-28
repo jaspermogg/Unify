@@ -62,7 +62,7 @@ ChildBrowser.prototype._onEvent = function(data) {
         window.plugins.childBrowser.onClose();
     }
     if (data.type == ChildBrowser.LOCATION_CHANGED_EVENT && typeof window.plugins.childBrowser.onLocationChange === "function") {
-        window.plugins.childBrowser.onLocationChange(data.location);
+    	data.location == "###" ? (cb.Close(), console.log("directClose of browser")) : window.plugins.childBrowser.onLocationChange(data.location);
     }
 };
 
@@ -89,11 +89,17 @@ cordova.addConstructor(function() {
     cordova.addPlugin("childBrowser", new ChildBrowser());
 });
 
-function openChildBrowser(URL, locBar, closeOnly){
-		
+
+ChildBrowser.install();
+	
+	
+function openChildBrowser(URL, locBar, addressBar, backForward, isClose){
+	
+
+	
 	cb = window.plugins.childBrowser
 	
-	cb.showWebPage(URL, {"showLocationBar": locBar, "showCloseOnly" : closeOnly})
+	cb.showWebPage(URL, {"showLocationBar" : locBar, "ShowAddressBar" : addressBar, "showBackForward" : backForward, "showClose" : isClose})
 	
 	if (URL == "https://m.ncl.ac.uk/secure/attributes.xml#initial"){
 		
@@ -105,12 +111,19 @@ function openChildBrowser(URL, locBar, closeOnly){
 		cb.onClose = function(){
 		
 		isUserCloseAction ? (console.log("CHILDBROWSER CLOSED - user"), isUserCloseAction = false) : (console.log("CHILDBROWSER CLOSED - program"), shibIsAuthed(true))
-		} 
+		}
+		
 	} else {
 		
-	cb.onLocationChange = function(loc){
-		loc.search("###") != -1 ? cb.close() : console.log("url not equal to close")
+		cb.onLocationChange = function(loc){
+			console.log("onLocationChange fired. loc =" + loc)
+			loc.search("###") != -1 ? (window.plugins.childBrowser.close(), console.log("closing as url is = " + loc)) : console.log("url not equal to close as url is = " + loc)
 		}
+			
+		cb.onClose = function(){
+			
+			console.log("CHILDBROWSER CLOSED - user")	
+		}	
 		
 	}
 

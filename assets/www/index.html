@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script src="https://www.google.com/jsapi"></script>
 <!-- 	<link rel="stylesheet" href="css/android-theme.css" /> -->
-	<link rel="stylesheet" href="css/custom-jqm-theme.min.css"/>
+	<link rel="stylesheet" href="css/custom-jqm-theme.css"/>
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile.structure-1.1.0.min.css" />
 <!-- 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.css" /> -->
 	<link rel="stylesheet" href="css/my.css" />
@@ -56,14 +56,14 @@
 		
 	</div>
 
-	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="page3">
+	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="page2">
 		
 		<div data-role="header" data-theme="b" data-position="fixed" id="page1header" data-tap-toggle="false">
 			
 			<div class="ui-grid-b indicatorBarWrapper">
-				<div class="indicatorBar ui-block-b iB-left"><div class="ui-bar ui-bar-e"></div></div>
+				<div class="indicatorBar ui-block-b iB-left"><div class="ui-bar ui-bar-f"></div></div>
 				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar"></div></div>
-				<div class="indicatorBar iB-right ui-block-b"><div class="ui-bar"></div></div>
+				<!-- <div class="indicatorBar iB-right ui-block-b"><div class="ui-bar"></div></div> -->
 			</div>
 			
 			<div data-role="navbar" data-iconpos="none">
@@ -88,14 +88,14 @@
 	</div>
 
 
-	<div data-role="page" class="page" id="page2" data-swipeleft="page3" data-swiperight="page1">
+	<div data-role="page" class="page" id="page2" data-swipeleft="page1" data-swiperight="page1">
 		
 		<div data-role="header" data-theme="b" data-position="fixed" id="page2header" data-tap-toggle="false">
 			
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar iB-left ui-block-b"></div>
-				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-e"></div></div>
-				<div class="indicatorBar iB-right ui-block-b"></div>
+				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-f"></div></div>
+				<!-- <div class="indicatorBar iB-right ui-block-b"></div> -->
 			</div>
 			
 			<div data-role="navbar" data-iconpos="none">
@@ -106,9 +106,9 @@
 					<li>
 						<a href="" data-theme="b" id="feedSelectorViewCustom">Custom</a>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="" data-theme="b" id="feedSelectorViewCurrent">Current</a>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 		</div>
@@ -137,9 +137,9 @@
 					<br />
 					<a data-role="button" id="twitterFeedSearch">Search for Twitter Feeds</a>
 					<br />
-					<a data-role="button" id="siteFeedSearch">Search for Feeds From a Site</a>
-					<br />
 					<a data-role="button" id="facebookFeedSearch">Choose Facebook Feeds</a>
+					<br />
+					<a data-role="button" id="siteFeedSearch">Search for Feeds From a Site</a>
 					<br />
 					<a data-role="button" id="urlFeedSearch">Add a Feed by URL</a>
 				</div>
@@ -154,7 +154,7 @@
 					</ul>
 				</div>
 				
-				<div id="searchBarContainer" style="padding-bottom: 0.9em;">
+				<div id="searchBarContainer">
 					<form id="searchForm">
 					<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
 					<input type="search" name="search" id="feedSearchBar" data-mini="true" data-theme="b" />
@@ -162,7 +162,7 @@
 					</form>
 				</div>
 				
-				<div id="urlBarContainer" style="padding-bottom: 0.9em;">
+				<div id="urlBarContainer">
 					<form id="customUrlForm">
 					<label for="startUrlSearchButton" class="ui-hidden-accessible">Type a URL here...</label>
 					<input type="search" name="URL" id="customUrlInput" data-mini="true" data-theme="b" />
@@ -187,22 +187,22 @@
 		
 		
 		
-	<div data-role="page" class="page" id="page3"  data-swipeleft="page1" data-swiperight="page2">
+	<!-- <div data-role="page" class="page" id="page3"  data-swipeleft="page1" data-swiperight="page2">
 		
 		<div data-role="header" data-theme="b" data-position="fixed" id="page3header" data-tap-toggle="false">
 			
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar iB-left ui-block-b"></div>
 				<div class="indicatorBar iB-middle ui-block-b"></div>
-				<div class="indicatorBar iB-right ui-block-b"><div class="ui-bar ui-bar-e"></div></div>
+				<div class="indicatorBar iB-right ui-block-b"><div class="ui-bar ui-bar-f"></div></div>
 			</div>
 			
 		<div data-role="navbar" data-iconpos="none" class="singleButtonNavBar">
 				<ul>
 					<li>
-						<a href="" data-theme="b">Settings</a>
+						<a href="" class="ui-btn-active" data-theme="b">Settings</a>
 					</li>
-						</ul>
+				</ul>
 			</div>
 		</div>	
 
@@ -220,9 +220,9 @@
 			</div>
 		</div>
 	
-	</div>
+	</div> -->
 	
-	<div data-role="page" class="page" id="page4"  data-swipeleft="page2" data-swiperight="page2">
+	<div data-role="page" class="page" id="page4"  data-swipeleft="" data-swiperight="">
 		
 		<div data-role="header" data-position="fixed" id="page4header" data-tap-toggle="false">
 			<div data-role="navbar" data-iconpos="none">

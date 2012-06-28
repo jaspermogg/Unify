@@ -12,6 +12,7 @@ function feedSelectorViewCustom(){
 		window.searchType = "default"
 		$('#customFeedAddButtons').hide()
 		$('#searchBarContainer').show()
+		$('#feedSearchBar').focus()
 		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
 			$('#customFeedAddButtons').show()
@@ -25,6 +26,7 @@ function feedSelectorViewCustom(){
 		window.searchType = "twitter"
 		$('#customFeedAddButtons').hide()
 		$('#searchBarContainer').show()
+		$('#feedSearchBar').focus()
 		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
 			$('#customFeedAddButtons').show()
@@ -50,7 +52,7 @@ function feedSelectorViewCustom(){
 		$('#customFeedAddConfirmationButtons').show()
 		$('#customFeedAddButtons').hide()
 		$('#urlBarContainer').show()
-		
+		$('#customUrlInput').focus()
 		$('#feedSearchDone').off('click').on('click', function(){
 			$('#customFeedAddButtons').show()
 			$('#urlBarContainer').hide()
@@ -63,6 +65,7 @@ function feedSelectorViewCustom(){
 		window.searchType = "site"
 		$('#customFeedAddButtons').hide()
 		$('#searchBarContainer').show()
+		$('#feedSearchBar').focus()
 		$('#customFeedAddConfirmationButtons').show()
 		$('#feedSearchDone').off('click').on('click', function(){
 			$('#customFeedAddButtons').show()

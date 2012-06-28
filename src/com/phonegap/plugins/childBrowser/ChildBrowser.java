@@ -50,8 +50,9 @@ public class ChildBrowser extends Plugin {
     private WebView webview;
     private EditText edittext;
     private boolean showLocationBar = true;
-    private boolean showCloseOnly = false;
-
+    private boolean showBackForward = true;
+    private boolean showAddressBar = true;
+    private boolean showClose = true;
     /**
 * Executes the request and returns PluginResult.
 *
@@ -145,8 +146,20 @@ public class ChildBrowser extends Plugin {
 
 //    allows tracking of close by x-click
     private void userCloseDialog() {
-    	this.webview.loadUrl(edittext.getText().toString() + "###");
-    	this.webview.loadUrl(edittext.getText().toString() + "###");
+    	try {
+            JSONObject obj = new JSONObject();
+            obj.put("type", LOCATION_CHANGED_EVENT);
+            obj.put("location", "###");
+            Log.i("ChildBrowser", "userClosing attempting to sendUpdate");
+            
+            sendUpdate(obj, true);
+    	} catch (JSONException e) {
+            Log.i("ChildBrowser", "userClosing failed");
+        }
+    	if (dialog != null) {
+    	Log.i("ChildBrowser", "userClosing had no effect - dismissing dialog");
+    	dialog.dismiss();
+    	}
     }
     
     /**
@@ -202,11 +215,18 @@ public class ChildBrowser extends Plugin {
     private boolean getShowLocationBar() {
         return this.showLocationBar;
     }
+    
+    private boolean getShowClose() {
+        return this.showClose;
+    }
+    
+    private boolean getShowBackForward() {
+        return this.showBackForward;
+    }
+    
 
-
-
-    private boolean getShowCloseOnly() {
-        return this.showCloseOnly;
+    private boolean getShowAddressBar() {
+        return this.showAddressBar;
     }
     
     /**
@@ -217,10 +237,13 @@ public class ChildBrowser extends Plugin {
 * @param jsonObject
 */
     public String showWebPage(final String url, JSONObject options) {
+    	Log.i(LOG_TAG, "Childbrowser opened!");
         // Determine if we should hide the location bar.
         if (options != null) {
             showLocationBar = options.optBoolean("showLocationBar", true);
-            showCloseOnly = options.optBoolean("showCloseOnly", true);
+            showAddressBar = options.optBoolean("ShowAddressBar", true);
+            showBackForward = options.optBoolean("showBackForward", true);
+            showClose = options.optBoolean("showClose", true);
         }
         
         // Create dialog in new thread
@@ -318,11 +341,12 @@ public class ChildBrowser extends Plugin {
                 webview.setWebChromeClient(new WebChromeClient());
                 WebViewClient client = new ChildBrowserClient(edittext);
                 webview.setWebViewClient(client);
+                
                 WebSettings settings = webview.getSettings();
                 settings.setJavaScriptEnabled(true);
                 settings.setJavaScriptCanOpenWindowsAutomatically(true);
-
-                // settings.setBuiltInZoomControls(true);
+                
+                settings.setBuiltInZoomControls(true);
                 settings.setPluginsEnabled(true);
                 settings.setDomStorageEnabled(true);
                 webview.loadUrl(url);
@@ -332,14 +356,18 @@ public class ChildBrowser extends Plugin {
                 webview.requestFocus();
                 webview.requestFocusFromTouch();
 
-                if (!getShowCloseOnly()) {
+                if (getShowAddressBar()) {
+                    toolbar.addView(edittext);
+                }
+                
+                if (getShowBackForward()) {
                 	toolbar.addView(back);
                     toolbar.addView(forward);
-                    toolbar.addView(edittext);
-                }         
+                }                
                 
-                //TO-DO comment out or not?
-                toolbar.addView(close);
+                if (getShowClose()) {
+                	toolbar.addView(close);
+                }
                                 
                 if (getShowLocationBar()) {
                     main.addView(toolbar);
@@ -371,10 +399,18 @@ public class ChildBrowser extends Plugin {
 * @param obj a JSONObject contain event payload information
 */
     private void sendUpdate(JSONObject obj, boolean keepCallback) {
+    	
+    	Log.i("ChildBrowser", "attempting sendUpdate");
+    	
         if (this.browserCallbackId != null) {
             PluginResult result = new PluginResult(PluginResult.Status.OK, obj);
             result.setKeepCallback(keepCallback);
             this.success(result, this.browserCallbackId);
+            Log.i("ChildBrowser", "sendUpdate process completed");
+            
+        } else {
+        	
+        	Log.i("ChildBrowser", "sendUpdate did not complete");
         }
     }
 

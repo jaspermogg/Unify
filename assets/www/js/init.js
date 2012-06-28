@@ -39,12 +39,21 @@ function page0init(){
 function page1init() {
 	console.log("page 1 initialised")
 
+	
+
 	//position bar code [start]	
 	if(!page1hasinited){
+		
+	$('.ui-navbar').width($('.ui-navbar').width()+1)
+		
+		
 	var fullWidth = $('#page1 .indicatorBarWrapper').width()
-	var smallWidth = (fullWidth/3) *0.95
-	var bigWidth = fullWidth - (2*smallWidth)
-	$('#page1 div.iB-middle, #page1 div.iB-right').width(smallWidth)
+	// var smallWidth = (fullWidth/3) *0.95
+	// var bigWidth = fullWidth - (2*smallWidth)
+	// $('#page1 div.iB-middle, #page1 div.iB-right').width(smallWidth)
+	var smallWidth = (fullWidth) *0.47
+	var bigWidth = fullWidth - smallWidth
+	$('#page1 div.iB-middle').width(smallWidth)
 	$('#page1 div.iB-left').width(bigWidth)
 	}
 	//position bar code [end]
@@ -71,17 +80,22 @@ function page2init() {
 	
 	//position bar code [start]	
 	if(!page2hasinited){
+	
+	$('.ui-navbar').width($('.ui-navbar').width()+1)
+	
 	var fullWidth = $('#page2 .indicatorBarWrapper').width()
-	var smallWidth = (fullWidth/3) *0.9
-	var bigWidth = fullWidth - (2*smallWidth)
-	$('#page2 div.iB-left, #page2 div.iB-right').width(smallWidth)
-	$('#page2 div.iB-middle').width(bigWidth)
+	// var smallWidth = (fullWidth/3) *0.9
+	// var bigWidth = fullWidth - (2*smallWidth)
+	// $('#page2 div.iB-left, #page2 div.iB-right').width(smallWidth)
+	var smallWidth = (fullWidth) *0.47
+	var bigWidth = fullWidth - smallWidth
+	$('#page2 div.iB-left').width(smallWidth)
+	$('#page2 div.iB-middle').width(bigWidth+1)
 	}
 	//position bar code [end]
 
-	$('form#searchForm').off('submit').on('submit', function(event){
+	$('form#searchForm input#startSearchButton').off('click').on('click', function(event){
 		event.preventDefault()
-		
 		switch(searchType){
 			case "twitter":
 				userSearchFeeds('site:twitter.com ' + $('input#feedSearchBar').val())
@@ -92,6 +106,7 @@ function page2init() {
 			default:
 				userSearchFeeds($('input#feedSearchBar').val())
 		}
+		
 	})
 	
 	$('#feedSelectorViewOfficial').off('click').on('click', feedSelectorViewOfficial)	
@@ -104,7 +119,7 @@ function page2init() {
 function page3init() {
 	
 	
-	
+
 	//position bar code [start]
 	if(!page3hasinited){
 	var fullWidth = $('#page3 .indicatorBarWrapper').width()
@@ -129,6 +144,6 @@ function page4init() {
 	
 	$('#postPreviewContainerWrapper li, #postPreviewContainerWrapper a').off('click').on('click', function(event){
 	event.preventDefault()
-	openChildBrowser($(event.target).parents('li , h2').find('a').attr("data-uri"))
+	openChildBrowser($(event.target).parents('li , h2').find('a').attr("data-uri"), true, false, true, false)
 	})
 }
