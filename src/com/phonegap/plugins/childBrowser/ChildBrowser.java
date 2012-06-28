@@ -287,7 +287,7 @@ public class ChildBrowser extends Plugin {
                 });
                 back.setId(1);
                 try {
-                    back.setImageBitmap(loadDrawable("www/childbrowser/icon_arrow_left.png"));
+                    back.setImageBitmap(loadDrawable("www/images/childbrowser/icon_arrow_left.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
@@ -301,7 +301,7 @@ public class ChildBrowser extends Plugin {
                 });
                 forward.setId(2);
                 try {
-                    forward.setImageBitmap(loadDrawable("www/childbrowser/icon_arrow_right.png"));
+                    forward.setImageBitmap(loadDrawable("www/images/childbrowser/icon_arrow_right.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }
@@ -331,7 +331,7 @@ public class ChildBrowser extends Plugin {
                 });
                 close.setId(4);
                 try {
-                    close.setImageBitmap(loadDrawable("www/childbrowser/icon_close.png"));
+                    close.setImageBitmap(loadDrawable("www/images/childbrowser/icon_close.png"));
                 } catch (IOException e) {
                     Log.e(LOG_TAG, e.getMessage(), e);
                 }

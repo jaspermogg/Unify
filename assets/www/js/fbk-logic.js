@@ -17,7 +17,7 @@ function fbafterinit(isloggedin){
 	var containerhtml = $('#page1accordioncontainer').html();
 			
 	if (containerhtml == ""){
-		loaderhtml = '<img src="css/images/indicator.gif" id="loaderimg" class="ajaxloader" />';
+		loaderhtml = '<img src="images/indicator.gif" id="loaderimg" class="ajaxloader" />';
 		$('#page1accordioncontainer').html(loaderhtml);
 	}
 	
@@ -36,7 +36,7 @@ function fetchgroups(container, postsOrFeeds){
 		containerhtml = $(container).html();
 		
 		if (containerhtml == ""){
-			loaderhtml = '<img src="css/images/indicator.gif" id="loaderimg" class="ajaxloader" />';
+			loaderhtml = '<img src="images/indicator.gif" id="loaderimg" class="ajaxloader" />';
 			$(container).html(loaderhtml);
 		}
 	
@@ -80,7 +80,7 @@ function fetchgroups(container, postsOrFeeds){
 		containerhtml = $(container).html();
 				
 		if (containerhtml == ""){
-			loaderhtml = '<img src="css/images/indicator.gif" id="loaderimg" class="ajaxloader" />';
+			loaderhtml = '<img src="images/indicator.gif" id="loaderimg" class="ajaxloader" />';
 			$(container).html(loaderhtml);
 		}
 						
@@ -113,7 +113,7 @@ function fetchgroups(container, postsOrFeeds){
 	
 	var targetdiv = $('div.feedbar [data-fbid='+ fbid +']')
 		
-	loaderhtml = '<img src="css/images/indicator.gif" class="ajaxloader" id="loaderimg" fbid='+fbid+' />';
+	loaderhtml = '<img src="images/indicator.gif" class="ajaxloader" id="loaderimg" fbid='+fbid+' />';
 	
 	targetdiv.html(loaderhtml);
 		
