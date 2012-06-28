@@ -39,7 +39,12 @@ function page0init(){
 function page1init() {
 	console.log("page 1 initialised")
 
+	$('#feedIndex').html(JSON.stringify(localStorage.getItem("feedIndex")))
+	$('#rssFeeds').html(JSON.stringify(localStorage.getItem("RSS")))
+	$('#twiFeeds').html(JSON.stringify(localStorage.getItem("TWI")))
+	$('#fbkFeeds').html(JSON.stringify(localStorage.getItem("FBK")))
 	
+	oFeedIndex = getFeedIndex()
 
 	//position bar code [start]	
 	if(!page1hasinited){
@@ -73,6 +78,7 @@ function page1init() {
 }
 
 function page2init() {
+
 	
 	console.log("page 2 initialised")
 	
@@ -140,6 +146,30 @@ function page4init() {
 	$('#page4backButton').removeClass('ui-btn-active')
 	console.log("page 4 initialised")
 	
+	
+	$('#page4addFeedButton').off('click').on('click', function(){
+
+		addUri = $('#page4addFeedButton').attr('data-feedUri')
+		addTitle = $('#page4addFeedButton').attr('data-feedTitle')
+		addType = $('#page4addFeedButton').attr('data-feedType')
+		
+		alert(addUri + ' ' + addTitle + ' ' + addType)
+	
+		switch(addType){
+			case "FBK":
+				addFbkFeed(addUri, addTitle)
+			break;
+			case "TWI":
+				addTwiFeed(addUri, addTitle)
+			break;
+			case "RSS":
+				addRssFeed(addUri, addTitle)
+			break;
+		}
+	
+		$.mobile.changePage('#page2')
+
+	})
 	
 	
 	$('#postPreviewContainerWrapper li, #postPreviewContainerWrapper a').off('click').on('click', function(event){

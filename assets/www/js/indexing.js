@@ -17,29 +17,24 @@ function indexFeeds(){
 	oTwi = getTwiFeeds()
 	oRss = getRssFeeds()
 
-	var oIndex = {
-		"URI" : "",
-		"Type" : ""
+	if(oFbk){
+		for(i=0; i<oFbk.length; i++){
+			oFeedIndex.push({"URI" : oFbk[i].URI, "Type" : "FBK"})
+		}
 	}
-
-	for(i=0; i<oFbk.length; i++){
-		oIndex.Type = "FBK"
-		oIndex.URI = oFbk[i].URI
-		oFeedIndex.push(oIndex)
+	
+	if(oTwi){	
+		for(i=0; i<oTwi.length; i++){
+			oFeedIndex.push({"URI" : oTwi[i].URI, "Type" : "TWI"})
+		}
 	}
-
-	for(i=0; i<oTwi.length; i++){
-		oIndex.Type = "TWI"
-		oIndex.URI = oTwi[i].URI
-		oFeedIndex.push(oIndex)
+	
+	if(oRss){
+		for(i=0; i<oRss.length; i++){
+			oFeedIndex.push({"URI" : oRss[i].URI, "Type" : "RSS"})
+		}
 	}
-
-	for(i=0; i<oRss.length; i++){
-		oIndex.Type = "RSS"
-		oIndex.URI = oRss[i].URI
-		oFeedIndex.push(oIndex)
-	}
-
+	
 	localStorage.setItem("feedIndex", JSON.stringify(oFeedIndex))
 
 }

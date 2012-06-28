@@ -30,6 +30,7 @@ function processFeedSearchResults(feedSearchResults){
 	var feedPreview = new google.feeds.Feed(previewURI)
 	
 	feedPreview.load(function(feedPreviewFetchResults){
+
 		var entries = feedPreviewFetchResults.feed.entries
 		
 		if(feedPreviewFetchResults.error){
@@ -62,7 +63,14 @@ function processFeedSearchResults(feedSearchResults){
 				}
 				
 			}
-		$.mobile.changePage($('#page4'))		
+		$.mobile.changePage($('#page4'))
+
+		
+		previewURI.search("twitter.com") != -1 ? feedType="TWI" : feedType="RSS"		
+
+		$('#page4addFeedButton').attr("data-feedTitle", feedPreviewFetchResults.feed.title).attr("data-feedUri", previewURI).attr("data-feedType", feedType)		
+
+		
 		console.log("makes it here")
 		$('ul#previewPostList').listview()
 		console.log("makes it here2")

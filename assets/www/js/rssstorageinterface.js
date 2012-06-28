@@ -30,27 +30,20 @@ function addRssFeed(Uri, title){
 	indexFeeds()	
 }
 
-function remRssFeed(remUri){
+function remRssFeed(arrayIndex){
 	
-	console.log('attempting to remove feed URL - ' + remUri + ' from localStorage')
-	
+	console.log('attempting to remove Rssfeed array number' + arrayIndex + 'from localStorage')
+		
 	oRss = getRssFeeds()
 	
-	for(i=0; i < oRss.length; i++){
+	console.log("Removing" + JSON.stringify(oRss[arrayIndex]))
 		
-		if(oRss[i].URI == remUri){
-			delete oRss[i]
-			console.log('removing feed URI - ' + oRss[i].URI)
-		} else {
-			console.log('not removing feed URI - ' + oRss[i].URI)
-		}
-		
-	}
-	
+	oRss.splice(arrayIndex, 1)	
+
 	if(oRss.length == null || oRss.length == 0){
 		localStorage.setItem("RSS", null)
 	} else {
-		localStorage,setItem("RSS", JSON.stringify(oRss))
+		localStorage.setItem("RSS", JSON.stringify(oRss))
 	}
 	
 	indexFeeds()

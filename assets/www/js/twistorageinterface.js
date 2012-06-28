@@ -30,27 +30,20 @@ function addTwiFeed(Uri, title){
 	indexFeeds()
 }
 
-function remTwiFeed(remUri){
+function remTwiFeed(arrayIndex){
 	
-	console.log('attempting to remove feed URL - ' + remUri + ' from localStorage')
-	
+	console.log('attempting to remove Twifeed array number' + arrayIndex + 'from localStorage')
+		
 	oTwi = getTwiFeeds()
 	
-	for(i=0; i < oTwi.length; i++){
+	console.log("Removing" + JSON.stringify(oTwi[arrayIndex]))
 		
-		if(oTwi[i].URI == remUri){
-			delete oTwi[i]
-			console.log('removing feed URI - ' + oTwi[i].URI)
-		} else {
-			console.log('not removing feed URI - ' + oTwi[i].URI)
-		}
-		
-	}
-	
+	oTwi.splice(arrayIndex, 1)	
+
 	if(oTwi.length == null || oTwi.length == 0){
 		localStorage.setItem("TWI", null)
 	} else {
-		localStorage,setItem("TWI", JSON.stringify(oTwi))
+		localStorage.setItem("TWI", JSON.stringify(oTwi))
 	}
 	
 	indexFeeds()
