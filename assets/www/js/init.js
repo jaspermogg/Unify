@@ -1,10 +1,8 @@
 function page0init(){
 	console.log("page 0 initialised")
-	
-	
-	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : function(){}
-	
 		
+	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : function(){}
+			
 	$("#institutionSearchField").autocomplete({
 	    method: 'GET', // allows POST as well
 	    icon: 'arrow-r', // option to specify icon
@@ -34,11 +32,15 @@ function page0init(){
 	} 
 }
 
-
-
 function page1init() {
 	console.log("page 1 initialised")
 
+	if(page1hasinited == false){
+	    $.getJSON("http://www.fullerbloom.com/NCLFeeds.json", function (data) {
+	        handleNclFeeds(data)
+	    });
+	}
+	
 	$('#feedIndex').html(JSON.stringify(localStorage.getItem("feedIndex")))
 	$('#rssFeeds').html(JSON.stringify(localStorage.getItem("RSS")))
 	$('#twiFeeds').html(JSON.stringify(localStorage.getItem("TWI")))
@@ -48,26 +50,14 @@ function page1init() {
 
 	//position bar code [start]	
 	if(!page1hasinited){
-		
 	$('.ui-navbar').width($('.ui-navbar').width()+1)
-		
-		
 	var fullWidth = $('#page1 .indicatorBarWrapper').width()
-	// var smallWidth = (fullWidth/3) *0.95
-	// var bigWidth = fullWidth - (2*smallWidth)
-	// $('#page1 div.iB-middle, #page1 div.iB-right').width(smallWidth)
 	var smallWidth = (fullWidth) *0.47
 	var bigWidth = fullWidth - smallWidth
 	$('#page1 div.iB-middle').width(smallWidth)
 	$('#page1 div.iB-left').width(bigWidth)
 	}
 	//position bar code [end]
-	
-	// if(fbkisloggedin()){
-		// fbafterinit(true);
-	// } else {
-		// fbafterinit(false);
-	// }
 	
 	$('#page1accordioncontainer').on('click', 'a:not(.ui-collapsible-heading-toggle)', function(event){
 	event.preventDefault()
@@ -79,20 +69,16 @@ function page1init() {
 
 function page2init() {
 
-	
 	console.log("page 2 initialised")
 	
 	$('div#page4content li').remove()
 	
-	//position bar code [start]	
+	//position bar code [start]
 	if(!page2hasinited){
 	
 	$('.ui-navbar').width($('.ui-navbar').width()+1)
 	
 	var fullWidth = $('#page2 .indicatorBarWrapper').width()
-	// var smallWidth = (fullWidth/3) *0.9
-	// var bigWidth = fullWidth - (2*smallWidth)
-	// $('#page2 div.iB-left, #page2 div.iB-right').width(smallWidth)
 	var smallWidth = (fullWidth) *0.47
 	var bigWidth = fullWidth - smallWidth
 	$('#page2 div.iB-left').width(smallWidth)
@@ -122,24 +108,6 @@ function page2init() {
 	window.page2hasinited = true
 }
 
-function page3init() {
-	
-	
-
-	//position bar code [start]
-	if(!page3hasinited){
-	var fullWidth = $('#page3 .indicatorBarWrapper').width()
-	var smallWidth = (fullWidth/3) *0.95
-	var bigWidth = fullWidth - (2*smallWidth)
-	$('#page3 div.iB-left, #page3 div.iB-middle').width(smallWidth)
-	$('#page3 div.iB-right').width(bigWidth)
-	}
-	//position bar code [end]
-	
-	console.log("page 3 initialised")
-
-	window.page3hasinited = true
-}
 
 function page4init() {
 	$('#page4backButton').off('click').on('click', function(){$.mobile.changePage('#page2')})

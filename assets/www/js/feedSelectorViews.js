@@ -1,11 +1,12 @@
 function feedSelectorViewOfficial(){
 	
 	$('#customFeedAddWrapper').hide()
-	
+	$('#officialFeedWrapper').show()
+			
 }
 
 function feedSelectorViewCustom(){
-	
+	$('#officialFeedWrapper').hide()
 	$('#customFeedAddWrapper').show()
 	
 	$('#genericFeedSearch').off('click').on('click', function(){

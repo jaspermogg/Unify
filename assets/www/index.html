@@ -20,9 +20,10 @@
 	<script src="js/jquery.mobile-1.1.0.js"></script>
 	<script src="js/jqm.autoComplete-1.4.js"></script>
 	
-	<script src="js/init.js"></script>		
+	<script src="js/eventhandlers.js">
+	</script><script src="js/init.js"></script>		
 	<script src="js/NCLauthenticate.js"></script>
-	<script src="js/eventhandlers.js"></script>
+
 	
 	<script src="js/facebook_js_sdk.js"></script>
 	<script src="js/fbk-logic.js"></script>
@@ -50,8 +51,6 @@
 		<div data-role="content" id="page1content">
 			<h3 id="welcomeText"></h3>
 			<h2>Choose your institution from the list below.</h2>
-<!-- 			<input type="button" value="Let's go!" id="loginButton" />
-			<input type="button" value="Alert localStorage" id="localStorageButton" /> -->
 			
 		<div id="institutionSearchWrapper">
 				<input type="search" id="institutionSearchField" placeholder="Choose your institution...">
@@ -70,7 +69,6 @@
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar ui-block-b iB-left"><div class="ui-bar ui-bar-f"></div></div>
 				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar"></div></div>
-				<!-- <div class="indicatorBar iB-right ui-block-b"><div class="ui-bar"></div></div> -->
 			</div>
 			
 			<div data-role="navbar" data-iconpos="none">
@@ -93,7 +91,7 @@
 			<div id='localStorageWrapper'>
 				
 				<h2>Index</h2>
-				<div id='feedIndex'></div>
+				<div id='feedIndex'><ul></ul></div>
 				
 				<h2>RSS</h2>	
 				<div id='rssFeeds'></div>
@@ -119,7 +117,6 @@
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar iB-left ui-block-b"></div>
 				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-f"></div></div>
-				<!-- <div class="indicatorBar iB-right ui-block-b"></div> -->
 			</div>
 			
 			<div data-role="navbar" data-iconpos="none">
@@ -130,9 +127,6 @@
 					<li>
 						<a href="" data-theme="b" id="feedSelectorViewCustom">Custom</a>
 					</li>
-					<!-- <li>
-						<a href="" data-theme="b" id="feedSelectorViewCurrent">Current</a>
-					</li> -->
 				</ul>
 			</div>
 		</div>

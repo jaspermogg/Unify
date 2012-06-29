@@ -1,3 +1,19 @@
+//throws NCL feeds up on the official tab.
+function handleNclFeeds(nclFeeds){
+	nclFeedData = nclFeeds.entries
+	$('#page2 ul#officialFeedContainer').empty()
+	
+	for(i=0; i<nclFeedData.length; i++){
+		
+		liHtml = '<li data-uri="' + nclFeedData[i].url + '" data-type="' + nclFeedData[i].type + '"><h2>' +
+		nclFeedData[i].title + '</h2><p><strong>' + nclFeedData[i].link + '</strong</p><p>' + nclFeedData[i].contentSnippet + '</p></li>'
+
+		$('#page2 ul#officialFeedContainer').append(liHtml)
+	}
+	$('#page2 ul#officialFeedContainer').listview('refresh')
+}
+
+
 //Decides which authorisation script to use
 function auth(institution){
 	switch (institution){

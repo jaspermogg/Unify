@@ -19,19 +19,19 @@ function indexFeeds(){
 
 	if(oFbk){
 		for(i=0; i<oFbk.length; i++){
-			oFeedIndex.push({"URI" : oFbk[i].URI, "Type" : "FBK"})
+			oFeedIndex.push({"URI" : oFbk[i].URI, "type" : "FBK", "typeIndex" : i})
 		}
 	}
 	
 	if(oTwi){	
 		for(i=0; i<oTwi.length; i++){
-			oFeedIndex.push({"URI" : oTwi[i].URI, "Type" : "TWI"})
+			oFeedIndex.push({"URI" : oTwi[i].URI, "type" : "TWI", "typeIndex" : i})
 		}
 	}
 	
 	if(oRss){
 		for(i=0; i<oRss.length; i++){
-			oFeedIndex.push({"URI" : oRss[i].URI, "Type" : "RSS"})
+			oFeedIndex.push({"URI" : oRss[i].URI, "type" : "RSS", "typeIndex" : i})
 		}
 	}
 	
