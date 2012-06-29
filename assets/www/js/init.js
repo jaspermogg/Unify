@@ -85,6 +85,9 @@ function page2init() {
 
 	console.log("page 2 initialised")
 
+	$('#feedSearchBar').is(':hidden') ? null : $('#feedSearchBar').focus()
+	$('#customUrlInput').is(':hidden') ? null : $('#customUrlInput').focus()
+
 	if(!localStorage.getItem("feedIndex")){
 		$('#initialInstructions2').show()
 		var thisHasBeenDone = false
@@ -135,6 +138,7 @@ function page4init() {
 	$('#page4backButton').removeClass('ui-btn-active')
 	console.log("page 4 initialised")
 	
+	$('#page4addFeedButton').hasClass('ui-btn-active') ? $('#page4addFeedButton').removeClass('ui-btn-active') : null
 	
 	$('#page4addFeedButton').off('click').on('click', function(){
 
