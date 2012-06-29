@@ -32,15 +32,17 @@ document.addEventListener('deviceready', function(){
 
 	fbinit()
 	
-	$('#loginButton').off('click').on('click', function(){shibIsAuthed()})
-	$('#localStorageButton').off('click').on('click', function(){alert(JSON.stringify(localStorage))})
-	
 	// document.addEventListener("backbutton", function(){console.log("pressed the back button")});
 
 	$('#customFeedAddWrapper').hide()
 	$('#searchBarContainer').hide()
 	$('#customFeedAddConfirmationButtons').hide()
 	$('#urlBarContainer').hide()
+	$('#byFeedWrapper').hide()
+	$('#initialInstructions').hide()
+	$('#initialInstructions2').hide()
+	$('#customInstructions').hide()
+
 
 	$('#page0').trigger('pageshow')
 

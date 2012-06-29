@@ -2,6 +2,17 @@
 	margin-left: 23px;
 }
 
+#page0 h2, #page4 h2{
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 30px;
+}
+
+
+#page0 h2{
+	margin-top: 20px;
+}
+
 .hdricon{
     margin-left: -6px;
     margin-top: -1px;
@@ -35,11 +46,17 @@
 
 .ui-bar-f{
 	/*border-bottom:1px solid #F4C63f;*/
-
+	margin-top:-1px;
 	height:7px;
 }
 
 .indicatorBarWrapper{
+	margin-top:-1px;
 	height:7px;
 /*	margin-bottom:-9px;*/
+}
+
+.ui-bar-e{
+	text-align: center;
+	padding: 3px 0 -10px 0;
 }

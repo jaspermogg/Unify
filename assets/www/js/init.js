@@ -23,28 +23,42 @@ function page0init(){
 		$('#institutionSuggestions').empty()
 		})
 	
-	if (localStorage.getItem("shibXml")){
-		shibData = JSON.parse(localStorage.getItem("shibXml"))
-		var data = shibData.attributes
-		$('#welcomeText').text("Nice to see you, " + data.HTTP_SHIB_PROG_TYPE.text + " " + data.HTTP_SHIB_EP_STAFFORSTUDENT.text + " " +
-		data.HTTP_SHIB_PN_GIVENNAME.text + " " + data.HTTP_SHIB_PN_SN.text + "!"
-		)
-	} 
+	
 }
 
-function page1init() {
+function page1init() {	
 	console.log("page 1 initialised")
+
+	if(page1hasinited == false){
+		if (localStorage.getItem("authData")){
+			authData = JSON.parse(localStorage.getItem("authData"))
+			var data = authData.attributes
+			$('#initialInstructions p').html("<p>Nice to see you, " + data.HTTP_SHIB_PROG_TYPE.text + " " + data.HTTP_SHIB_EP_STAFFORSTUDENT.text + " " +
+			data.HTTP_SHIB_PN_GIVENNAME.text + " " + data.HTTP_SHIB_PN_SN.text + "!</p> " + $('#initialInstructions p').html())
+		}
+	}
+
+	if(!localStorage.getItem("feedIndex")){
+		$('#initialInstructions').show()
+		$('#byTimeWrapper').hide()
+		$('#addFirstFeed').off('click').on('click', function(){$.mobile.changePage('#page2')})
+	} else {
+		$('#initialInstructions').hide()
+		$('#feedSelectorViewByTime').hasClass('ui-btn-active') ? feedSelectorByTime() : feedSelectorByFeed()
+		$('#feedSelectorViewByTime').off('click').on('click', feedSelectorByTime)
+		$('#feedSelectorViewByFeed').off('click').on('click', feedSelectorByFeed)
+	}
 
 	if(page1hasinited == false){
 	    $.getJSON("http://www.fullerbloom.com/NCLFeeds.json", function (data) {
 	        handleNclFeeds(data)
 	    });
 	}
+
 	
 	$('#feedIndex').html(JSON.stringify(localStorage.getItem("feedIndex")))
-	$('#rssFeeds').html(JSON.stringify(localStorage.getItem("RSS")))
-	$('#twiFeeds').html(JSON.stringify(localStorage.getItem("TWI")))
-	$('#fbkFeeds').html(JSON.stringify(localStorage.getItem("FBK")))
+	$('#postsByTime').html(JSON.stringify(localStorage.getItem("feedIndex")))
+
 	
 	oFeedIndex = getFeedIndex()
 
@@ -52,7 +66,7 @@ function page1init() {
 	if(!page1hasinited){
 	$('.ui-navbar').width($('.ui-navbar').width()+1)
 	var fullWidth = $('#page1 .indicatorBarWrapper').width()
-	var smallWidth = (fullWidth) *0.47
+	var smallWidth = (fullWidth) *0.25
 	var bigWidth = fullWidth - smallWidth
 	$('#page1 div.iB-middle').width(smallWidth)
 	$('#page1 div.iB-left').width(bigWidth)
@@ -70,6 +84,14 @@ function page1init() {
 function page2init() {
 
 	console.log("page 2 initialised")
+
+	if(!localStorage.getItem("feedIndex")){
+		$('#initialInstructions2').show()
+		var thisHasBeenDone = false
+	} else {
+		thisHasBeenDone == false ? $('#customFeedAddButtons').css("margin-top", "10px") : null
+		thisHasBeenDone = true
+	}
 	
 	$('div#page4content li').remove()
 	
@@ -79,10 +101,10 @@ function page2init() {
 	$('.ui-navbar').width($('.ui-navbar').width()+1)
 	
 	var fullWidth = $('#page2 .indicatorBarWrapper').width()
-	var smallWidth = (fullWidth) *0.47
+	var smallWidth = (fullWidth) *0.25
 	var bigWidth = fullWidth - smallWidth
 	$('#page2 div.iB-left').width(smallWidth)
-	$('#page2 div.iB-middle').width(bigWidth+1)
+	$('#page2 div.iB-middle').width(bigWidth)
 	}
 	//position bar code [end]
 
@@ -103,7 +125,6 @@ function page2init() {
 	
 	$('#feedSelectorViewOfficial').off('click').on('click', feedSelectorViewOfficial)	
 	$('#feedSelectorViewCustom').off('click').on('click', feedSelectorViewCustom)	
-	$('#feedSelectorViewCurrent').off('click').on('click', feedSelectorViewCurrent)
 	
 	window.page2hasinited = true
 }
@@ -135,8 +156,9 @@ function page4init() {
 			break;
 		}
 	
+	
 		$.mobile.changePage('#page2')
-
+		$('#initialInstructions2').hide()
 	})
 	
 	

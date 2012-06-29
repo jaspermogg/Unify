@@ -24,11 +24,13 @@
 	</script><script src="js/init.js"></script>		
 	<script src="js/NCLauthenticate.js"></script>
 
-	
 	<script src="js/facebook_js_sdk.js"></script>
 	<script src="js/fbk-logic.js"></script>
 	<script src="js/populate.js"></script>
 
+	<script src="js/MochiKit.js"></script>
+	<script src="js/Base.js"></script>
+	<script src="js/DateTime.js"></script>
 	<script src="js/feedsearchlogic.js"></script>
 	<script src="js/feedSelectorViews.js"></script>
 	
@@ -44,18 +46,19 @@
 	
 	<div data-role="page" class="page" id="page0">
 		
-		<div data-role="header" data-theme="b" data-position="inline" id="page0header" data-tap-toggle="false">
-			<h2>Welcome to Unify</h2>
+		<div data-role="header" data-theme="a" data-position="inline" id="page0header" data-tap-toggle="false">
+			<h1 href="" data-theme="a" id="headerWelcome">Welcome to Unify</h1>
 		</div>
 
-		<div data-role="content" id="page1content">
-			<h3 id="welcomeText"></h3>
-			<h2>Choose your institution from the list below.</h2>
+		<div data-role="content" id="page0content">
 			
-		<div id="institutionSearchWrapper">
-				<input type="search" id="institutionSearchField" placeholder="Choose your institution...">
-				<ul id="institutionSuggestions" data-role="listview" data-inset="true"></ul>	      
-		</div>
+			<h2 id="welcomeText">Please start typing its name and then choose your institution from the list below.</h2>
+				
+				
+			<div id="institutionSearchWrapper">
+					<input type="search" id="institutionSearchField" placeholder="Choose your institution...">
+					<ul id="institutionSuggestions" data-role="listview" data-inset="true"></ul>	      
+			</div>
 			
 		</div>
 
@@ -64,7 +67,7 @@
 
 	<div data-role="page" class="page" id="page1" data-swipeleft="page2" data-swiperight="page2">
 		
-		<div data-role="header" data-theme="b" data-position="fixed" id="page1header" data-tap-toggle="false">
+		<div data-role="header" data-theme="c" data-position="fixed" id="page1header" data-tap-toggle="false">
 			
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar ui-block-b iB-left"><div class="ui-bar ui-bar-f"></div></div>
@@ -74,13 +77,10 @@
 			<div data-role="navbar" data-iconpos="none">
 				<ul>
 					<li>
-						<a class="ui-btn-active" href="" data-theme="b">By Feed</a>
+						<a class="ui-btn-active" href="" data-theme="b" id="feedSelectorViewByTime">By Time</a>
 					</li>
 					<li>
-						<a href="" data-theme="b">By Recent</a>
-					</li>
-					<li>
-						<a href="" data-theme="b">By Type</a>
+						<a href="" data-theme="b" id="feedSelectorViewByFeed">By Feed</a>
 					</li>
 				</ul>
 			</div>
@@ -88,23 +88,21 @@
 		
 		<div data-role="content" id="page1content">
 			
-			<div id='localStorageWrapper'>
-				
-				<h2>Index</h2>
-				<div id='feedIndex'><ul></ul></div>
-				
-				<h2>RSS</h2>	
-				<div id='rssFeeds'></div>
-				
-				<h2>Twitter</h2>
-				<div id='twiFeeds'></div>
-				
-				<h2>Facebook</h2>
-				<div id='fbkFeeds'></div>
-			
+			<div class="ui-bar-e" id="initialInstructions">
+				<a data-role="button" id="addFirstFeed">Add your first feed!</a>
+				<p>Unify has two pages, with two tabs per page. Changing page happens by swiping left or right with your finger - try it now, or click the button above to add your first feed!</p>
 			</div>
-		
-			<div id="page1AccordionContainer"></div>
+						
+			<div id="byTimeWrapper">
+				<h1>By Time</h1>
+				<div id='postsByTime'></div>		
+			</div>
+			
+			<div id="byFeedWrapper">
+				<h1>By Feed</h1>
+				<div id='feedIndex'></div>
+			</div>	
+
 		</div>
 
 	</div>
@@ -112,11 +110,11 @@
 
 	<div data-role="page" class="page" id="page2" data-swipeleft="page1" data-swiperight="page1">
 		
-		<div data-role="header" data-theme="b" data-position="fixed" id="page2header" data-tap-toggle="false">
+		<div data-role="header" data-theme="c" data-position="fixed" id="page2header" data-tap-toggle="false">
 			
 			<div class="ui-grid-b indicatorBarWrapper">
 				<div class="indicatorBar iB-left ui-block-b"></div>
-				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-f"></div></div>
+				<div class="indicatorBar iB-middle ui-block-b"><div class="ui-bar ui-bar-d"></div></div>
 			</div>
 			
 			<div data-role="navbar" data-iconpos="none">
@@ -135,7 +133,10 @@
 
 		<div data-role="content" id="page2content">
 			
-
+			<div id="initialInstructions2" class="ui-bar-e" style="margin-bottom:30px">
+				<p id="officialInstructions">These are the University's Official Feeds - quality sources of information added for you by students and staff. Click one to preview it, then click the 'Add' button if you want to follow it.</p>
+				<p id="customInstructions">Here you can add feeds from various sources on the web. Some of it's good, some of it's not. It's a jungle out there!</p>
+			</div>
 			
 			<div id="officialFeedWrapper">
 				<ul data-role="listview" id="officialFeedContainer">
@@ -149,22 +150,24 @@
 					<br />
 				</div>
 								
-				<div id="customFeedAddButtons">
-					<br />
+				<div id="customFeedAddButtons" style="margin-top:-15px;">
+					
 					<a data-role="button" id="genericFeedSearch">Search for RSS Feeds</a>
-					<br />
+				
 					<a data-role="button" id="twitterFeedSearch">Search for Twitter Feeds</a>
-					<br />
-					<a data-role="button" id="facebookFeedSearch">Choose Facebook Feeds</a>
-					<br />
+				
+					<a data-role="button" id="facebookFeedSearch">Choose Facebook Groups</a>
+					
+					<a data-role="button" id="facebookPageSearch">Choose Facebook Pages</a>
+			
 					<a data-role="button" id="siteFeedSearch">Search for Feeds From a Site</a>
-					<br />
+					
 					<a data-role="button" id="urlFeedSearch">Add a Feed by URL</a>
 				</div>
 				
 			
 				<div id="facebookGroupWrapper">
-					<div id="page2AccordionContainer"></div>
+					<div id="facebookGroups"><ul data-role="listview" id="facebookGroupList"></ul></div>
 				</div>
 				
 				<div id="currentFeedWrapper">
