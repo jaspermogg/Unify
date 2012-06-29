@@ -145,9 +145,7 @@ function page4init() {
 		addUri = $('#page4addFeedButton').attr('data-feedUri')
 		addTitle = $('#page4addFeedButton').attr('data-feedTitle')
 		addType = $('#page4addFeedButton').attr('data-feedType')
-		
-		alert(addUri + ' ' + addTitle + ' ' + addType)
-	
+			
 		switch(addType){
 			case "FBK":
 				addFbkFeed(addUri, addTitle)
