@@ -7,7 +7,6 @@ var fbinit = function(){
 		});
 		console.log("fkb-logic.js: FB init executed");
 	} catch (e) {
-		alert(e);
 		console.log("fkb-logic.js: error - " + e);
 	}
 }
@@ -52,8 +51,8 @@ function fetchgroups(container){
 					for (i = 0; i < data.length; i++) {
 						var item = data[i];
 						item.description ? description = '<p class="contentSnippet">' + item.description.replace(/<(?:.|\n)*?>/gm, '') + '</p>' : description = ""						
-						groupHtml = groupHtml + '<li> <a href="" data-fbid="'+ item.id + 
-						'" data-feedtype="FBK"> <h3>' + item.name + '</h3>' + '<p><strong>http://www.facebook.com/' +
+						groupHtml = groupHtml + '<li data-fbid="'+ item.id + '" data-feedtype="FBK"> <a href="" > <h3>' +
+						item.name + '</h3>' + '<p><strong>http://www.facebook.com/' +
 						item.id +'</strong></p>'+ description +' </a></li>'
 					};
 				$(container).html(groupHtml)
@@ -84,8 +83,8 @@ function fetchpages(container){
 					for (i = 0; i < data.length; i++) {
 						var item = data[i];
 						item.description ? description = '<p class="contentSnippet">' + item.description.replace(/<(?:.|\n)*?>/gm, '') + '</p>' : description = ""						
-						groupHtml = groupHtml + '<li> <a href="" data-fbid="'+ item.id + 
-						'" data-feedtype="FBK"> <h3>' + item.name + '</h3>' + '<p><strong>http://www.facebook.com/' +
+						groupHtml = groupHtml + '<li data-fbid="'+ item.id + '" data-feedtype="FBK"> <a href="" > <h3>' +
+						item.name + '</h3>' + '<p><strong>http://www.facebook.com/' +
 						item.id +'</strong></p>'+ description +' </a></li>'
 					};
 				$(container).html(groupHtml)
@@ -95,56 +94,51 @@ function fetchpages(container){
 			};
 		})
 }
+
+
+
+function fbkPreviewFetch(previewURI, feedName){
 	
-	
-
-
-
-
-function feedfetch(event){
-
-alert($(event.target).parent().html())
-var fbid = $(clickedheader).attr("data-fbid");
-
-var targetdiv = $('div.feedbar [data-fbid='+ fbid +']')
-	
-loaderhtml = '<img src="images/indicator.gif" class="ajaxloader" id="loaderimg" fbid='+fbid+' />';
-
-targetdiv.html(loaderhtml);
-	
-	FB.api('/'+fbid+'/feed',
+	FB.api('/'+previewURI+'/feed',
 		{fields : ''},
-		function(response){
-			if (response.error) {
-				if (response.error.code == 104 || response.error.code ==2500){
-					var r = confirm("You don't seem to be logged into Facebook. Would you like to login now?")
-	
-					if(r){
-						login()
-					} else {
-						$(container).html("<p>Something went awry! Are you definitely connected to the intertubes?</p>");
-						alert(JSON.stringify(response.error));
-					}
+		function(feedPreviewFetchResults){
+			
+		var entries = feedPreviewFetchResults.data
+		
+		if(feedPreviewFetchResults.error){
+			console.log(JSON.stringify(feedPreviewFetchResults.error))
+			alert("That didn't work! Please give it another go and make sure you're connected to the intertubes!")
+
+		} else {
+
+			var previewPostHtml = ""
+			
+			$('div#postPreviewFeedSummaryWrapper').html('<div id="postPreviewFeedSummary"><h2><a href="" data-uri="www.facebook.com/'+ previewURI +'">'+
+			feedName +'</a></h2></div>')
+			
+			for(i=0;i<entries.length;i++){
 				
-			} else {
-				alert("here!")
-				fhtml = ""
-				fdata = response.data;
-					for ( var i = 0; (i < response.data.length || i < 5); i++) {
-					var item = fdata[i];
-					urlSnippet = item.id.split('_')[0]
-					urlSecondSnippet = item.id.split('_')[1]
-					cleanUrlSnippet = urlSnippet.replace(/\"/gm,"")
-					cleanUrlSecondSnippet = urlSecondSnippet.replace(/\"/gm,"")
-					fhtml += '<li><a data-uid="https://www.facebook.com/groups/' + cleanUrlSnippet + '/post/'+ cleanUrlSecondSnippet +'"><p>' + item.created_time + '</p><h2>' + item.from.name + '</h2><p>' + item.message + '</p></a></li>';
-					};
-				targetdiv.empty()
-				targetdiv.html(fhtml)
-				targetdiv.listview()
+				var preFormatDate = entries[i].created_time
+				
+								
+				if(entries[i].contentSnippet != ""){
+				previewPostHtml = previewPostHtml + '<li><a href="" data-uri="www.facebook.com/'+ previewURI +'" data-postpreviewid="previewpost' + 
+				i + '" data-feedtype="FBK"><h3>' + entries[i].from.name +'</h3><p><strong>' + preFormatDate +
+				'</p></strong><p>' +	entries[i].message + '</p></a></li>'
+				}
+				
+				$('ul#previewPostList').html(previewPostHtml)
+				
 			}
-		}
-		}
-		)
+			
+		$.mobile.changePage($('#page4'))
+
+		$('#page4addFeedButton').attr("data-feedTitle", feedPreviewFetchResults.feed.title).attr("data-feedUri", previewURI).attr("data-feedType", "FBK")
+
+		$('ul#previewPostList').listview('refresh')
+	
+	}	
+	})
 }
 
 

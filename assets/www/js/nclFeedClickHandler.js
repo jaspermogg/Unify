@@ -34,10 +34,6 @@ function handleNclFeedClicks(previewURI, officialTitle){
 				
 			}
 			
-			
-			
-			
-			
 		$.mobile.changePage($('#page4'))
 	
 		previewURI.search("twitter.com") != -1 ? feedType="TWI" : feedType="RSS"		

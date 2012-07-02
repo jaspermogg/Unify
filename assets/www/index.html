@@ -47,7 +47,7 @@
 
 <body>
 	
-	<div data-role="page" class="page" id="page0">
+	<div data-role="page" class="page" id="page0" data-theme="b">
 		
 		<div data-role="header" data-theme="g" data-position="inline" id="page0header" data-tap-toggle="false">
 			<h1 href="" data-theme="a" id="headerWelcome">Welcome to Unify</h1>
@@ -55,7 +55,7 @@
 
 		<div data-role="content" id="page0content">
 			
-			<h2 id="welcomeText">Please start typing its name and then choose your institution from the list below.</h2>
+			<h2 id="welcomeText">Please start typing your institution's name and choose it when it appears. To view the full list type anything and press backspace.</h2>
 				
 				
 			<div id="institutionSearchWrapper">
@@ -172,24 +172,11 @@
 					<div id="facebookGroups"><ul data-role="listview" id="facebookGroupList"></ul></div>
 				</div>
 				
-				<div id="currentFeedWrapper">
-					<ul data-role="listview" id="currentFeedContainer">
-					</ul>
-				</div>
-				
 				<div id="searchBarContainer">
 					<form id="searchForm">
 					<label for="feedSearchBar" class="ui-hidden-accessible">Search for feeds...</label>
-					<input type="search" name="search" id="feedSearchBar" data-mini="true" data-theme="b" />
+					<input type="search" name="search" id="feedSearchBar" data-theme="b" />
 					<input type="submit" id="startSearchButton" label="Submit" data-role="none" />
-					</form>
-				</div>
-				
-				<div id="urlBarContainer">
-					<form id="customUrlForm">
-					<label for="startUrlSearchButton" class="ui-hidden-accessible">Type a URL here...</label>
-					<input type="search" name="URL" id="customUrlInput" data-mini="true" data-theme="b" />
-					<input type="submit" id="startUrlSearchButton" label="Submit" data-role="none" />
 					</form>
 				</div>
 				
@@ -199,10 +186,7 @@
 							
 			</div>
 			
-			<div id="currentFeedWrapper">
-				<ul data-role="listview" id="currentFeedContainer">
-				</ul>
-			</div>
+
 
 		</div>
 

@@ -3,7 +3,7 @@
 	var page2hasinited = false
 	var page3hasinited = false
 	var isUserCloseAction = false
-	var hasAddedFirst = false
+	var isFirstAdd = true
 
 document.addEventListener('deviceready', function(){
 		

@@ -1,7 +1,7 @@
 function page0init(){
 	console.log("page 0 initialised")
 		
-	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : $('#page0').show()
+	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : $('#page0').show();
 			
 	$("#institutionSearchField").autocomplete({
 	    method: 'GET', // allows POST as well
@@ -90,7 +90,7 @@ function page1init() {
 	$('#feedIndex').off('taphold').on('taphold', 'div', function(){
 				
 				
-		r = confirm("Do you want to remove this feed - " + $(this).attr('data-title'))
+		r = confirm("Do you want to remove this feed - " + $(this).attr('data-title') + "?")
 		
 		if(r){
 			target = $(this).attr('data-arrayindex')
@@ -124,6 +124,10 @@ function page2init() {
 
 	$('#page2 div#officialFeedWrapper').off('click').on('click', 'a', function(){
 		handleNclFeedClicks($(this).parents('li.officialLink').attr('data-uri'), $(this).parents('li.officialLink').attr('data-officialtitle'))
+	})
+	
+	$('#page2 div#facebookGroups').off('click').on('click', 'a', function(){
+		fbkPreviewFetch($(this).parents('li').attr('data-fbid'), $(this).find('h3').text())
 	})
 
 	$('#feedSearchBar').is(':hidden') ? null : $('#feedSearchBar').focus()
@@ -161,12 +165,14 @@ function page2init() {
 			case "site":
 				userSearchFeeds('site:' + $('input#feedSearchBar').val())
 				break;
+			case "url":
+				byUrlPreview($('input#feedSearchBar').val())
+				break;
 			default:
 				userSearchFeeds($('input#feedSearchBar').val())
 		}
-		
 	})
-	
+		
 	$('#feedSelectorViewOfficial').off('click').on('click', feedSelectorViewOfficial)	
 	$('#feedSelectorViewCustom').off('click').on('click', feedSelectorViewCustom)	
 	
@@ -199,7 +205,10 @@ function page4init() {
 			break;
 		}
 	
-		hasAddedFirst ? null : (alert("Congratulations - you've added your first feed! To remove one, just go to the 'By Feed' tab on the front page and hold down on a feed title."), hasAddedFirst = true)
+		if(isFirstAdd){
+		 alert("Congratulations - you've added your first feed! To remove one, just go to the 'By Feed' tab on the front page and hold down on a feed title.")
+		 isFirstAdd = false
+		}
 	
 		$.mobile.changePage('#page2')
 		

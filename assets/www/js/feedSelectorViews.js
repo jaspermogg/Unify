@@ -91,12 +91,12 @@ function feedSelectorViewCustom(){
 		$('#initialInstructions2').hide()
 		$('#customFeedAddConfirmationButtons').show()
 		$('#customFeedAddButtons').hide()
-		$('#urlBarContainer').show()
-		$('#customUrlInput').focus()
+		$('#searchBarContainer').show()
+		$('#customFeedAddButtons').focus()
 		$('#feedSearchDone').off('click').on('click', function(){
 			!localStorage.getItem("feedIndex") ? $('#initialInstructions2').show() : null
 			$('#customFeedAddButtons').show()
-			$('#urlBarContainer').hide()
+			$('#searchBarContainer').hide()
 			$('#customFeedAddConfirmationButtons').hide()
 		})
 		

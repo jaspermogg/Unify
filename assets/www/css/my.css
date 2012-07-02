@@ -1,3 +1,19 @@
+
+
+.ui-input-clear{
+	padding: 2px 3px 0 0;
+	border:0px;
+	box-shadow: none;
+}
+
+#facebookGroupWrapper{
+	padding-top:22px;
+}
+
+#customFeedAddWrapper{
+	padding-top:15px;
+}
+
 .hdrtext{
 	margin-left: 23px;
 }
@@ -36,7 +52,12 @@
 
 .ui-navbar li .ui-btn:last-child{
 	margin-right: -4px;
-	border-right: 1px solid;
+	border-right: 1px solid #FFFFFF;
+}
+
+.myNavBar .ui-btn{
+	border-left: 0px solid #FFFFFF;
+	border-left: 0px solid #FFFFFF;
 }
  
 .singleButtonNavBar{

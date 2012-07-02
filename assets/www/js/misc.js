@@ -1,3 +1,51 @@
+function byUrlPreview(previewURI){
+
+	console.log("opening" + previewURI)
+	var feedPreview = new google.feeds.Feed(previewURI)
+	feedPreview.setNumEntries(5)
+	feedPreview.load(function(feedPreviewFetchResults){
+		var entries = feedPreviewFetchResults.feed.entries
+		
+		if(feedPreviewFetchResults.error){
+			console.log(JSON.stringify(feedPreviewFetchResults.error))
+			alert("That didn't work! Please make sure your URL has the form 'http://xyz.xyz.xyz/xyz', or something thereabouts. The http:// is crucial, as is the spelling.")
+
+		} else {
+
+			var previewPostHtml = ""
+			
+			$('div#postPreviewFeedSummaryWrapper').html('<div id="postPreviewFeedSummary"><h2><a href="" data-uri="'+feedPreviewFetchResults.feed.link +'">'+
+			feedPreviewFetchResults.feed.title +'</a></h2></div>')
+			
+			for(i=0;i<entries.length;i++){
+				
+				var preFormatDate = entries[i].publishedDate
+				formattedDate = preFormatDate.slice(0, (preFormatDate.length - 6))
+								
+				if(entries[i].contentSnippet != ""){
+				previewPostHtml = previewPostHtml + '<li><a href="" data-uri="'+ entries[i].link +'" data-postpreviewid="previewpost' + 
+				i + '" data-feedtype="RSS"><h3>' + entries[i].title +'</h3><p><strong>' + formattedDate +
+				'</p></strong><p>' +	entries[i].contentSnippet + '</p></a></li>'
+				$('ul#previewPostList').html(previewPostHtml)
+
+				}
+				
+			}
+			
+		$.mobile.changePage($('#page4'))
+	
+		previewURI.search("twitter.com") != -1 ? feedType="TWI" : feedType="RSS"
+		previewURI.search("facebook.com") != -1 ? feedType="FBK" : feedType="RSS"
+		
+		$('#page4addFeedButton').attr("data-feedTitle", feedPreviewFetchResults.feed.title).attr("data-feedUri", previewURI).attr("data-feedType", feedType)
+		$('ul#previewPostList').listview()
+		$('ul#previewPostList').listview('refresh')
+	
+	}	
+	})
+
+}
+
 //throws NCL feeds up on the official tab.
 function handleNclFeeds(nclFeeds){
 	nclFeedData = nclFeeds.entries
