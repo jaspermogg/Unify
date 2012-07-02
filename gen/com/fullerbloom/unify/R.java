@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.marguspala.facebooktest;
+package com.fullerbloom.unify;
 
 public final class R {
     public static final class attr {

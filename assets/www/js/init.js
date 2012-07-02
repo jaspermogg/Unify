@@ -127,6 +127,7 @@ function page2init() {
 	})
 	
 	$('#page2 div#facebookGroups').off('click').on('click', 'a', function(){
+		alert("This function is still a work in progress! You can preview the feed, but not add it yet.")
 		fbkPreviewFetch($(this).parents('li').attr('data-fbid'), $(this).find('h3').text())
 	})
 

@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.marguspala.facebooktest;
+package com.fullerbloom.unify;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

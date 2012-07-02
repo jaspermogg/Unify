@@ -1,4 +1,4 @@
-package com.marguspala.facebooktest;
+package com.fullerbloom.unify;
 
 
 import android.os.Bundle;
@@ -9,12 +9,12 @@ import org.apache.cordova.DroidGap;
 import java.io.File;
 import android.util.Log;
 
-public class FacebookTestActivity extends DroidGap {
+public class Unify extends DroidGap {
     /** Called when the activity is first created. */	
 	
 	
     //remove this line in production
-//	private static FacebookTestActivity instance;
+//	private static Unify instance;
 	
 	//keep
     @Override
@@ -22,7 +22,7 @@ public class FacebookTestActivity extends DroidGap {
     	 
          //remove these lines in production
 //		instance = this;
-//        FacebookTestActivity.getInstance().clearApplicationData();
+//        Unify.getInstance().clearApplicationData();
         
     	//allows cookie setting
     	// CookieManager.setAcceptFileSchemeCookies(true);
@@ -34,7 +34,7 @@ public class FacebookTestActivity extends DroidGap {
 
     
 //remove to end in production
-//	public static FacebookTestActivity getInstance() {
+//	public static Unify getInstance() {
 //		return instance;
 //	}
 //
