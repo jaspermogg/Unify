@@ -2,6 +2,10 @@
 	margin-left: 23px;
 }
 
+#feedIndex .ui-collapsible-heading{
+	margin-bottom: 4px;
+}
+
 #page0 h2, #page4 h2{
 	text-align: center;
 	margin-top: 0px;

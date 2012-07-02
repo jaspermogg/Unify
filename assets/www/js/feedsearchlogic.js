@@ -74,9 +74,7 @@ function processFeedSearchResults(feedSearchResults){
 		$('#page4addFeedButton').attr("data-feedTitle", feedPreviewFetchResults.feed.title).attr("data-feedUri", previewURI).attr("data-feedType", feedType)		
 
 		
-		console.log("makes it here")
 		$('ul#previewPostList').listview()
-		console.log("makes it here2")
 		$('ul#previewPostList').listview('refresh')
 		}
 	})

@@ -20,7 +20,9 @@ function addTwiFeed(Uri, title){
 	var oNewTwi = {
 		"URI" : Uri,
 		"title" : title,
-		"filters" : ""
+		"filters" : "",
+		"feedType" : "",
+		"arrayIndex" : ""
 		}
 	
 	oTwi.push(oNewTwi)

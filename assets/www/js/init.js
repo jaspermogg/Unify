@@ -26,9 +26,11 @@ function page0init(){
 	
 }
 
-function page1init() {	
+function page1init() {
 	console.log("page 1 initialised")
-
+	
+	console.log("attempting fetchByFeed")
+		
 	if(page1hasinited == false){
 		if (localStorage.getItem("authData")){
 			authData = JSON.parse(localStorage.getItem("authData"))
@@ -56,11 +58,11 @@ function page1init() {
 	}
 
 	
-	$('#feedIndex').html(JSON.stringify(localStorage.getItem("feedIndex")))
-	$('#postsByTime').html(JSON.stringify(localStorage.getItem("feedIndex")))
+	$('#postsByTime').html(JSON.stringify(localStorage.getItem("feedIndex"))+'<br /><br />'+
+	JSON.stringify(localStorage.getItem("FBK"))+'<br /><br />' +
+	JSON.stringify(localStorage.getItem("RSS"))+'<br /><br />' +
+	JSON.stringify(localStorage.getItem("TWI")))
 
-	
-	oFeedIndex = getFeedIndex()
 
 	//position bar code [start]	
 	if(!page1hasinited){
@@ -78,12 +80,51 @@ function page1init() {
 	openChildBrowser($(event.target).parents('li').find('a').attr("data-uid"))
 	})
 
+	fetchByFeed($('#page1 div#feedIndex'))
+	
+	$('#feedIndex ul').off('click').on('click', 'li', function(){
+		target = $(this).find('a').attr('data-link')
+		openChildBrowser(target, false, false, false, false)
+	})
+	
+	$('#feedIndex').off('taphold').on('taphold', 'div', function(){
+				
+				
+		r = confirm("Do you want to remove this feed - " + $(this).attr('data-title'))
+		
+		if(r){
+			target = $(this).attr('data-arrayindex')
+			targetType = $(this).attr('data-feedtype')
+			
+			switch(targetType)
+			{
+				case "FBK" :
+				remFbkFeed(target)
+				break;
+				case "RSS" :
+				remRssFeed(target)
+				break;
+				case "TWI" :
+				remTwiFeed(target)
+				break;		
+			}
+			$(this).remove()
+		}
+		
+
+		
+	})
+	
 	window.page1hasinited = true
 }
 
 function page2init() {
 
 	console.log("page 2 initialised")
+
+	$('#page2 div#officialFeedWrapper').off('click').on('click', 'a', function(){
+		handleNclFeedClicks($(this).parents('li.officialLink').attr('data-uri'), $(this).parents('li.officialLink').attr('data-officialtitle'))
+	})
 
 	$('#feedSearchBar').is(':hidden') ? null : $('#feedSearchBar').focus()
 	$('#customUrlInput').is(':hidden') ? null : $('#customUrlInput').focus()

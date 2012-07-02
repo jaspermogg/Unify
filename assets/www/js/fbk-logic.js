@@ -42,7 +42,7 @@ function fetchgroups(container){
 		}, function(response) {
 				if (response.error){
 					$(container).html('<div style="text-align: center;">Something went awry! Are you definitely connected to the intertubes' +
-					'and logged into Facebook?<a data-role="button" onClick="useFb("fetchgroups($(""#page2 ul#facebookGroupList""))")">Try Again</a></div>');
+					'and logged into Facebook?<a data-role="button" onClick="useFb("fetchgroups($(' + container + '))")">Try Again</a></div>');
 				} else {
 					
 					var data = response.data;

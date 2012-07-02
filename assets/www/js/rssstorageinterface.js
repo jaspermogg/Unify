@@ -20,7 +20,9 @@ function addRssFeed(Uri, title){
 	var oNewRss = {
 		"URI" : Uri,
 		"title" : title,
-		"filters" : ""
+		"filters" : "",
+		"feedType" : "",
+		"arrayIndex" : ""
 		}
 	
 	oRss.push(oNewRss)

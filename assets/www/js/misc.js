@@ -5,12 +5,15 @@ function handleNclFeeds(nclFeeds){
 	
 	for(i=0; i<nclFeedData.length; i++){
 		
-		liHtml = '<li data-uri="' + nclFeedData[i].url + '" data-type="' + nclFeedData[i].type + '"><h2>' +
-		nclFeedData[i].title + '</h2><p><strong>' + nclFeedData[i].link + '</strong</p><p>' + nclFeedData[i].contentSnippet + '</p></li>'
+		liHtml = '<li class="officialLink" data-officialtitle ="'+nclFeedData[i].title+'" data-uri="' + nclFeedData[i].url + '" data-type="' + nclFeedData[i].type + '"><a><h2>' +
+		nclFeedData[i].title + '</h2><p><strong>' + nclFeedData[i].link + '</strong</p><p>' + nclFeedData[i].contentSnippet + '</p></a></li>'
 
 		$('#page2 ul#officialFeedContainer').append(liHtml)
 	}
+	
 	$('#page2 ul#officialFeedContainer').listview('refresh')
+	
+
 }
 
 

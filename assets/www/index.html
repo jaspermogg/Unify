@@ -39,6 +39,9 @@
 	<script src="js/rssstorageinterface.js"></script>	
 	<script src="js/twistorageinterface.js"></script>
 	
+	<script src="js/displayFeeds.js"></script>
+	<script src="js/nclFeedClickHandler.js"></script>
+	
 </head>
 
 
@@ -95,13 +98,12 @@
 						
 			<div id="byTimeWrapper">
 				<h1>By Time</h1>
-				<div id='postsByTime'></div>		
+				<div id='postsByTime'><ul data-role="listview" id="postsByTimeList"></ul></div>		
 			</div>
 			
 			<div id="byFeedWrapper">
-				<h1>By Feed</h1>
 				<div id='feedIndex'></div>
-			</div>	
+			</div>
 
 		</div>
 

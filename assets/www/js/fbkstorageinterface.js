@@ -20,7 +20,9 @@ function addFbkFeed(Uri, title){
 	var oNewFbk = {
 		"URI" : Uri,
 		"title" : title,
-		"filters" : ""
+		"filters" : "",
+		"feedType" : "",
+		"arrayIndex" : ""
 		}
 	
 	oFbk.push(oNewFbk)

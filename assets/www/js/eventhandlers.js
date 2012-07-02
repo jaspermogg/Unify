@@ -8,6 +8,8 @@ document.addEventListener('deviceready', function(){
 		
 	console.log("deviceready fired")
 	
+	$.event.special.tap.tapholdThreshold = 100;
+	$.event.special.swipe.horizontalDistanceThreshold = 130;
 	$.mobile.defaultPageTransition = 'none';
 	$.mobile.defaultDialogTransition = 'none';
 	
