@@ -3,8 +3,11 @@
 	var page2hasinited = false
 	var page3hasinited = false
 	var isUserCloseAction = false
+	var hasAddedFirst = false
 
 document.addEventListener('deviceready', function(){
+		
+	$('#page0').hide()	
 		
 	console.log("deviceready fired")
 	

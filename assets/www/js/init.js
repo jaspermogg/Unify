@@ -1,7 +1,7 @@
 function page0init(){
 	console.log("page 0 initialised")
 		
-	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : function(){}
+	localStorage.getItem("authData") != null ? $.mobile.changePage('#page1') : $('#page0').show()
 			
 	$("#institutionSearchField").autocomplete({
 	    method: 'GET', // allows POST as well
@@ -199,8 +199,10 @@ function page4init() {
 			break;
 		}
 	
+		hasAddedFirst ? null : (alert("Congratulations - you've added your first feed! To remove one, just go to the 'By Feed' tab on the front page and hold down on a feed title."), hasAddedFirst = true)
 	
 		$.mobile.changePage('#page2')
+		
 		$('#initialInstructions2').hide()
 	})
 	
