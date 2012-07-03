@@ -72,7 +72,7 @@ function auth(institution){
 			shibIsAuthed()
 			break;
 		case "Hogwarts School of Witchcraft and Wizardry" :
-			alert("No muggles allowed, thank you very much.")
+			hogwarts()
 			break;
 		case "Police Academy 3" :
 			alert("Come on, choose a university...")
